@@ -1,111 +1,102 @@
 package testes;
 
-import java.util.regex.Pattern;
-import java.util.concurrent.TimeUnit;
-import org.junit.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
+import static org.junit.Assert.fail;
 
-public class LoginTeste extends MasterPage{
-  private WebDriver driver;
-  private Driver baseDriver;
-  private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
-  WebElement login;
-  WebElement user;
-  WebElement password;
-  WebElement submit;
-  @Before
-  public void setUp() throws Exception {
-	  // cada teste deve verificar a existência de um elemento de verificação
-	  // O elemento pode ser um texto de erro um objeto que só aparece depois do login
-	  
-   
-  }
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 
-  public LoginTeste() {
-    LoginPage login = new LoginPage();
-    
-  }
+import pages.LoginPage;
+import pages.MasterPage;
 
-//  @Before
-  public void navigateBaseTestPage() {
-	  
-  }
-  
+public class LoginTeste extends MasterPage {
+	private LoginPage login;
+	private StringBuffer verificationErrors = new StringBuffer();
+	private boolean acceptNextAlert = true;
 
-  @Test
-  public void testeLoginCorreto()  throws Exception{
-	  login.navegarLogin();
-	  login.carregaObjetosPaginaLogin();
-//	  user.click();
-	  super.digitaTexto(this.user,"teste@teste.com");
-	  super.digitaTexto(this.password,"teste");
-	  
-	  submit.click();
-	  
-  }
-  
+	@Before
+	public void setUp() throws Exception {
+		// cada teste deve verificar a existência de um elemento de verificação
+		// O elemento pode ser um texto de erro um objeto que só aparece depois
+		// do login
+		navigateBaseTestPage();
+	}
 
-  
+	public LoginTeste() {
+		login = new LoginPage();
 
+	}
 
-@Test
-  public void testeLoginSenhaErrada()  throws Exception{
-	  navegarLogin();
-	  carregaObjetosPaginaLogin();
-//	  user.click();
-	  super.digitaTexto(this.user,"teste@teste.com");
-	  super.digitaTexto(this.password,"errado");
-	  
-	  submit.click();
-	  
-	  Assert.assertSame(driver.findElement(By.id("passwd")), null);
-  
-  }
-  
-  @After
-  public void tearDown() throws Exception {
-    driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
-  }
+	// @Before
+	public void navigateBaseTestPage() {
+		login.navegarLogin();
+		login.carregaObjetosPaginaLogin();
+	}
 
-  private boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
+	@Test
+	public void testeLoginCorreto() throws Exception {
+		// login.navegarLogin();
+		// login.carregaObjetosPaginaLogin();
 
-  private boolean isAlertPresent() {
-    try {
-      driver.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
+		login.digitaTexto(login.getUser(), "teste@teste.com");
+		login.digitaTexto(login.getPassword(), "teste");
 
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
-  }
+		login.getSubmit().click();
+
+	}
+
+	@Test
+	public void testeLoginSenhaErrada() throws Exception {
+		login.digitaTexto(login.getUser(), "teste@teste.com");
+		login.digitaTexto(login.getPassword(), "errado");
+		login.getSubmit().click();
+
+		// Assert.assertSame(driver.findElement(By.id("passwd")), null);
+
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		String verificationErrorString = verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
+	}
+
+	private boolean isElementPresent(By by) {
+		try {
+			login.getDriver().findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
+	private boolean isAlertPresent() {
+		try {
+			login.getDriver().switchTo().alert();
+			return true;
+		} catch (NoAlertPresentException e) {
+			return false;
+		}
+	}
+
+	private String closeAlertAndGetItsText() {
+		try {
+			Alert alert = login.getDriver().switchTo().alert();
+			String alertText = alert.getText();
+			if (acceptNextAlert) {
+				alert.accept();
+			} else {
+				alert.dismiss();
+			}
+			return alertText;
+		} finally {
+			acceptNextAlert = true;
+		}
+	}
 }

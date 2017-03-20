@@ -1,4 +1,4 @@
-package testes;
+package pages;
 
 import org.openqa.selenium.WebElement;
 

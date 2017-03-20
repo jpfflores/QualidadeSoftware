@@ -14,16 +14,21 @@ public class CadastroTeste {
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
-
+/* This class uses LoginPage as starting point
+ * 
+ * 
+ */
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://automationpractice.com/index.php";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
   }
 
+  public CadastroTeste(){
+	  
+  }
+  
   @Test
-  public void testCadastroTeste() throws Exception {
+  public void CadastroTeste() throws Exception {
     driver.get(baseUrl + "/index.php");
     driver.findElement(By.linkText("Sign in")).click();
     driver.findElement(By.id("email_create")).click();

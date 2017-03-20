@@ -1,0 +1,65 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import system.Driver;
+
+public class LoginPage extends MasterPage{
+	private Driver baseDriver;
+	private WebDriver driver;
+	
+	public WebElement getLogin() {
+		return login;
+	}
+
+	public WebElement getUser() {
+		return user;
+	}
+
+	public WebElement getPassword() {
+		return password;
+	}
+
+	public WebElement getSubmit() {
+		return submit;
+	}
+
+	public WebDriver getDriver(){
+		return driver;
+	}
+	
+	private WebElement login;
+	private WebElement user;
+	private WebElement password;
+	private WebElement submit;
+	private WebElement email;
+	private WebElement create;
+	
+	public LoginPage(){
+		baseDriver = new Driver();
+		driver = baseDriver.GetDriver();
+	}
+	
+	public void navegarLogin(){
+		  baseDriver.navegarPaginaBase();
+		  login = driver.findElement(By.linkText("Sign in"));
+		  login.click();
+	  }
+	
+	public void carregaObjetosPaginaLogin() {
+		// TODO Auto-generated method stub
+		user = driver.findElement(By.id("email"));
+		password = driver.findElement(By.id("passwd"));
+		submit = driver.findElement(By.id("SubmitLogin"));
+		email = driver.findElement(By.id("email_create"));
+		create = driver.findElement(By.id("submitCreate"));
+	}
+	
+	public void digitaTexto(WebElement elemento,String texto){
+		super.digitaTexto(elemento, texto);
+	}
+	
+	
+}
