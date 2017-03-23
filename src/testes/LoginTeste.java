@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 
+import org.junit.Assert;
 import pages.LoginPage;
 import pages.MasterPage;
 
@@ -37,7 +38,6 @@ public class LoginTeste extends MasterPage {
 		login.carregaObjetosPaginaLogin();
 	}
 
-	@Test
 	public void testeLoginCorreto() throws Exception {
 		// login.navegarLogin();
 		// login.carregaObjetosPaginaLogin();
@@ -54,9 +54,9 @@ public class LoginTeste extends MasterPage {
 		login.digitaTexto(login.getUser(), "teste@teste.com");
 		login.digitaTexto(login.getPassword(), "errado");
 		login.getSubmit().click();
-
-		// Assert.assertSame(driver.findElement(By.id("passwd")), null);
-
+		
+		Assert.assertNotNull(login.getAlert());
+		
 	}
 
 	@After

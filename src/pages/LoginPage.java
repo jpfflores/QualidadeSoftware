@@ -36,6 +36,7 @@ public class LoginPage extends MasterPage{
 	private WebElement submit;
 	private WebElement email;
 	private WebElement create;
+	private WebElement alert;
 	
 	public LoginPage(){
 		baseDriver = new Driver();
@@ -54,12 +55,17 @@ public class LoginPage extends MasterPage{
 		password = driver.findElement(By.id("passwd"));
 		submit = driver.findElement(By.id("SubmitLogin"));
 		email = driver.findElement(By.id("email_create"));
-		create = driver.findElement(By.id("submitCreate"));
+		create = driver.findElement(By.id("SubmitCreate"));
 	}
 	
 	public void digitaTexto(WebElement elemento,String texto){
 		super.digitaTexto(elemento, texto);
 	}
 	
-	
+	public WebElement getAlert(){
+//		alert = driver.findElement(By.className("alert alert-danger"));
+		alert = driver.findElement(By.xpath("//*[@id='center_column']/div[1]/ol/li"));
+		return alert;
+		
+	}
 }
