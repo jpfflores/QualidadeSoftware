@@ -13,12 +13,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.SelecionaProdutoPage;
+
 public class SelecionarTeste {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
-
+  private SelecionaProdutoPage compra; 
   @Before
   public void setUp() throws Exception {
 	System.setProperty("webdriver.firefox.marionette","C:\\Users\\alu201631416\\workspace\\geckodriver-v0.15.0-win64\\geckodriver.exe");  
@@ -30,7 +32,7 @@ public class SelecionarTeste {
 
   @Test
   public void testSelecionarTesteJava() throws Exception {
-    driver.get(baseUrl + "/index.php");
+    compra = new SelecionaProdutoPage();
     WebElement element = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
     element.sendKeys(Keys.TAB);
     driver.findElement(By.linkText("Blouses")).click();

@@ -10,7 +10,7 @@ import testes.SelecionarTeste;
 
 @RunWith(Suite.class)
 
-@Suite.SuiteClasses({SelecionarTeste.class,AdicionaCarrinhoTeste.class})
+@Suite.SuiteClasses({LoginTeste.class,AdicionaCarrinhoTeste.class})
 
 public class SuiteTeste {
 
