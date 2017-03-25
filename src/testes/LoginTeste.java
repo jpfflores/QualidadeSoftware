@@ -46,7 +46,7 @@ public class LoginTeste extends MasterPage {
 		login.digitaTexto(login.getPassword(), "teste");
 
 		login.getSubmit().click();
-
+		Assert.assertNotNull(login.getAlert());
 	}
 
 	@Test

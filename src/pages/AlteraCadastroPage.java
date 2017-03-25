@@ -57,21 +57,6 @@ public class AlteraCadastroPage {
 	
 	public AlteraCadastroPage(){
 		
-	    driver.findElement(By.cssSelector("a[title=\"Information\"] > span")).click();
-	    gender = driver.findElement(By.id("id_gender1"));
-	    firstName = driver.findElement(By.id("firstname"));
-	    lastName = driver.findElement(By.id("lastname"));
-	    email = driver.findElement(By.id("email"));
-	    new Select(driver.findElement(By.id("days"))).selectByVisibleText("regexp:1\\s+");
-	    driver.findElement(By.cssSelector("option[value=\"1\"]")).click();
-	    new Select(driver.findElement(By.id("months"))).selectByVisibleText("regexp:January\\s");
-	    driver.findElement(By.cssSelector("#months > option[value=\"1\"]")).click();
-	    new Select(driver.findElement(By.id("years"))).selectByVisibleText("regexp:2017\\s+");
-	    driver.findElement(By.cssSelector("option[value=\"2017\"]")).click();
-	    driver.findElement(By.name("submitIdentity"));
-	    oldPassword = driver.findElement(By.id("old_passwd"));
-	    password = driver.findElement(By.id("passwd"));
-	    confirmation = driver.findElement(By.id("confirmation"));
-	    submit = driver.findElement(By.name("submitIdentity"));
+
 	}
 }

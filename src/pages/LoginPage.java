@@ -18,10 +18,18 @@ public class LoginPage extends MasterPage{
 		return user;
 	}
 
+	public WebElement getEmail() {
+		return email;
+	}
+
 	public WebElement getPassword() {
 		return password;
 	}
 
+	public WebElement getCreate() {
+		return create;
+	}
+	
 	public WebElement getSubmit() {
 		return submit;
 	}
@@ -43,6 +51,11 @@ public class LoginPage extends MasterPage{
 		driver = baseDriver.GetDriver();
 	}
 	
+	public LoginPage(Driver bdriver ){
+		baseDriver = bdriver;
+		driver = baseDriver.GetDriver();
+	}
+
 	public void navegarLogin(){
 		  baseDriver.navegarPaginaBase();
 		  login = driver.findElement(By.linkText("Sign in"));
