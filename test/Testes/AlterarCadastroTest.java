@@ -12,15 +12,17 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.CadastroPage;
 import system.Driver;
 
 public class AlterarCadastroTest {
-	private Driver baseDriver;
+  private Driver baseDriver;
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
-
+  private CadastroPage cadastro;
+  
   @Before
   public void setUp() throws Exception {
 
@@ -29,11 +31,14 @@ public class AlterarCadastroTest {
   public void AlterarCadastroTest(){
 	  baseDriver = new Driver();
 	  driver = baseDriver.GetDriver();
-	  
+	  cadastro = new CadastroPage(baseDriver);
   }
   
   @Test
   public void testAlterarCadastroTest() throws Exception {
+		CadastroPage cadastro = new CadastroPage(baseDriver);
+		cadastro.navigateCadastrarUsuario();
+		cadastro.carregaCadastro();
 	  Assert.assertTrue("Somente para compilar.", true);
 	  /*
     driver.get(baseUrl + "/index.php?controller=my-account");
@@ -64,7 +69,8 @@ public class AlterarCadastroTest {
 
   @After
   public void tearDown() throws Exception {
-    //driver.quit();
+	  driver.close();
+    driver.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
       fail(verificationErrorString);

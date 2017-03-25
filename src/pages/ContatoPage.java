@@ -38,26 +38,28 @@ public class ContatoPage {
 		return message;
 	}
 	
-	public ContatoPage(){
-		
+	public ContatoPage(Driver driverB){
+		baseDriver = driverB;
+		driver = baseDriver.GetDriver();
 	}
 	
 	public void carregarContatoPage(){
+
 		subject = driver.findElement(By.name("id_contact"));
 		email = driver.findElement(By.id("email"));
 		order = driver.findElement(By.name("id_order"));
-		chooseFile = driver.findElement(By.linkText("Choose File"));
+		//chooseFile = driver.findElement(By.linkText("Choose File"));
 		message = driver.findElement(By.id("message"));
 		
 	}
 	
 	public void navegarContato(){
-		 Assert.assertTrue("Somente para compilar.", true);
-		 /*
+		 //Assert.assertTrue("Somente para compilar.", true);
+		 
 		  baseDriver.navegarPaginaBase();
 		  contact = driver.findElement(By.linkText("Contact us"));
 		  contact.click();
-		  */
+		 
 	  }
 	
 }
