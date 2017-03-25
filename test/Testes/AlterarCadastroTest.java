@@ -28,15 +28,15 @@ public class AlterarCadastroTest {
 
   }
 
-  public void AlterarCadastroTest(){
+  public AlterarCadastroTest(){
 	  baseDriver = new Driver();
 	  driver = baseDriver.GetDriver();
-	  cadastro = new CadastroPage(baseDriver);
+	  //cadastro = new CadastroPage(baseDriver);
   }
   
   @Test
-  public void testAlterarCadastroTest() throws Exception {
-		CadastroPage cadastro = new CadastroPage(baseDriver);
+  public void AlterarCadastroClienteTest() throws Exception {
+		cadastro = new CadastroPage(baseDriver);
 		cadastro.navigateCadastrarUsuario();
 		cadastro.carregaCadastro();
 	  Assert.assertTrue("Somente para compilar.", true);
@@ -69,8 +69,8 @@ public class AlterarCadastroTest {
 
   @After
   public void tearDown() throws Exception {
-	  driver.close();
-    driver.quit();
+    driver.close();
+	driver.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
       fail(verificationErrorString);

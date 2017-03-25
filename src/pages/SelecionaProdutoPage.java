@@ -37,8 +37,9 @@ public class SelecionaProdutoPage {
 	private WebElement checkStylesGirly;
 	
 	
-	public SelecionaProdutoPage(){
-		
+	public SelecionaProdutoPage(Driver baseD){
+		baseDriver = baseD;
+		driver = baseDriver.GetDriver();
 		//"layered_id_attribute_group_8"));
 	}
 	

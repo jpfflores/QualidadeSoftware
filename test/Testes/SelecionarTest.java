@@ -14,8 +14,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.SelecionaProdutoPage;
+import system.Driver;
 
 public class SelecionarTest {
+	private Driver baseDriver;
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -23,15 +25,14 @@ public class SelecionarTest {
   private SelecionaProdutoPage compra; 
   @Before
   public void setUp() throws Exception {
-	System.setProperty("webdriver.firefox.marionette","C:\\Users\\alu201631416\\workspace\\geckodriver-v0.15.0-win64\\geckodriver.exe");  
-	  
-    driver = new FirefoxDriver();
-    baseUrl = "http://automationpractice.com/index.php";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	  baseDriver = new Driver();
+	  driver = baseDriver.GetDriver();
   }
 
   @Test
   public void testSelecionarTesteJavaTest() throws Exception {
+	  compra = new SelecionaProdutoPage(baseDriver);
+	  
 	  Assert.assertTrue("Somente para compilar.", true);
 	  /*
 	  compra = new SelecionaProdutoPage();
