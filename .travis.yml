@@ -6,7 +6,7 @@ jdk:
 #before_install:
 #    - npm install chromedriver
     
-install: ant deps
+install: #ant deps
 
     - wget https://chromedriver.storage.googleapis.com/2.28/chromedriver_linux64.zip
     - unzip chromedriver_linux64.zip
