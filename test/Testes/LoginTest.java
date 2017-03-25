@@ -9,16 +9,21 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
-
+import org.openqa.selenium.WebDriver;
 import org.junit.Assert;
+
 import pages.LoginPage;
 import pages.MasterPage;
+import system.Driver;
 
 public class LoginTest extends MasterPage {
-	private LoginPage login;
-	private StringBuffer verificationErrors = new StringBuffer();
+	private Driver baseDriver;
+	private WebDriver driver;
+	private String baseUrl;
 	private boolean acceptNextAlert = true;
-
+	private StringBuffer verificationErrors = new StringBuffer();
+	private LoginPage login;
+	  
 	@Before
 	public void setUp() throws Exception {
 		// cada teste deve verificar a existencia de um elemento de verificacao
@@ -28,7 +33,10 @@ public class LoginTest extends MasterPage {
 	}
 
 	public LoginTest() {
-		login = new LoginPage();
+		baseDriver = new Driver();
+		driver = baseDriver.GetDriver();
+		
+		login = new LoginPage(baseDriver);
 
 	}
 
@@ -61,6 +69,7 @@ public class LoginTest extends MasterPage {
 
 	@After
 	public void tearDown() throws Exception {
+		driver.quit();
 		String verificationErrorString = verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
 			fail(verificationErrorString);
