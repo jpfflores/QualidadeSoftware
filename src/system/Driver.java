@@ -19,7 +19,7 @@ public class Driver {
 		//capabilities.setCapability("marionette", true);
 	    //driver = new FirefoxDriver(capabilities);
 		
-		System.setProperty("webdriver.chrome.driver", "\\libs\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
 		driver = new ChromeDriver();
 	    baseUrl = "http://automationpractice.com/index.php";
 	    driver.get(baseUrl);
