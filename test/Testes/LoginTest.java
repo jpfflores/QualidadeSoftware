@@ -33,7 +33,7 @@ public class LoginTest extends MasterPage {
 	}
 
 	public LoginTest() {
-		baseDriver = new Driver();
+		baseDriver = Driver.getInstance();
 		driver = baseDriver.GetDriver();
 		
 		login = new LoginPage(baseDriver);
@@ -69,8 +69,8 @@ public class LoginTest extends MasterPage {
 
 	@After
 	public void tearDown() throws Exception {
-		  driver.close();
-		driver.quit();
+		  //driver.close();
+		//driver.quit();
 		String verificationErrorString = verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
 			fail(verificationErrorString);

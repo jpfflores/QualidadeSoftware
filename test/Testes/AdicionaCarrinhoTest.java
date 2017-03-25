@@ -25,7 +25,7 @@ public class AdicionaCarrinhoTest {
   
   @Before
   public void setUp() throws Exception {
-	baseDriver = new Driver();  
+	baseDriver = Driver.getInstance();  
     driver = baseDriver.GetDriver();
 
   }
@@ -38,8 +38,8 @@ public class AdicionaCarrinhoTest {
 
   @After
   public void tearDown() throws Exception {
-	  driver.close();
-    driver.quit();
+//	  driver.close();
+//    driver.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
       fail(verificationErrorString);

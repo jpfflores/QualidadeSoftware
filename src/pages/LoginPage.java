@@ -47,7 +47,7 @@ public class LoginPage extends MasterPage{
 	private WebElement alert;
 	
 	public LoginPage(){
-		baseDriver = new Driver();
+		baseDriver = Driver.getInstance();
 		driver = baseDriver.GetDriver();
 	}
 	

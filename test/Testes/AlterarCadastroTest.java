@@ -29,7 +29,7 @@ public class AlterarCadastroTest {
   }
 
   public AlterarCadastroTest(){
-	  baseDriver = new Driver();
+	  baseDriver = Driver.getInstance();
 	  driver = baseDriver.GetDriver();
 	  //cadastro = new CadastroPage(baseDriver);
   }
@@ -69,8 +69,8 @@ public class AlterarCadastroTest {
 
   @After
   public void tearDown() throws Exception {
-    driver.close();
-	driver.quit();
+    //driver.close();
+	//driver.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
       fail(verificationErrorString);

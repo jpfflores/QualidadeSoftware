@@ -8,10 +8,11 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.chrome.*;
 
 public class Driver {
+	private static Driver instancia;
 	private WebDriver driver;
 	private String baseUrl;
 	
-	public Driver(){
+	private Driver(){
 		
 		//System.setProperty("webdriver.firefox.marionette","C:\\Users\\Achronys\\workspace\\geckodriver-v0.15.0-win64\\geckodriver.exe");
 		//System.setProperty("webdriver.gecko.driver", "C:\\Users\\Achronys\\workspace\\geckodriver-v0.15.0-win64\\" + "geckodriver.exe");
@@ -26,6 +27,12 @@ public class Driver {
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 	
+	public static synchronized Driver getInstance(){
+		if(instancia == null){
+			instancia = new Driver();
+		}
+		return instancia;
+	}
 	public WebDriver GetDriver(){
 		return driver;
 	}
