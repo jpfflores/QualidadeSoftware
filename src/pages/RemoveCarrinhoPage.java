@@ -29,8 +29,8 @@ public class RemoveCarrinhoPage {
 		return quantity;
 	}
 	
-	public RemoveCarrinhoPage(){
-		 baseDriver = new Driver();
+	public RemoveCarrinhoPage(Driver baseD){
+		 baseDriver = baseD;
 		 driver = baseDriver.GetDriver();
 	}
 	 

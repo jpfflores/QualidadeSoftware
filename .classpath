@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="libs"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_91"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="C:/Users/Achronys/Documents/Workspace/QualidadeSoftware/libs/selenium-java-3.3.0.zip"/>
 	<classpathentry kind="lib" path="C:/Users/Achronys/Documents/Workspace/QualidadeSoftware/libs/selenium-server-standalone-3.3.0.jar"/>

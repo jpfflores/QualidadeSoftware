@@ -87,6 +87,7 @@ public class CadastroTest {
   
   @After
   public void tearDown() throws Exception {
+	  driver.close();
     driver.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
