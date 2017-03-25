@@ -13,8 +13,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.CadastroPage;
+import system.Driver;
 
 public class CadastroTest {
+	Driver baseDriver;
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -30,6 +32,8 @@ public class CadastroTest {
   }
 
   public CadastroTest(){
+	  baseDriver = new Driver();
+	  driver = baseDriver.GetDriver();
 	  
   }
   
@@ -40,7 +44,7 @@ public class CadastroTest {
 
   @Test
   public void testCadastrarClienteTest() throws Exception {
-		CadastroPage cadastro = new CadastroPage();
+		CadastroPage cadastro = new CadastroPage(baseDriver);
 		cadastro.navigateCadastrarUsuario();
 		cadastro.carregaCadastro();
 		

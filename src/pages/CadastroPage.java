@@ -108,8 +108,8 @@ public class CadastroPage extends MasterPage{
 		return confirmation;
 	}
 
-	public CadastroPage(){
-		baseDriver = new Driver();
+	public CadastroPage(Driver based){
+		baseDriver = based;
 		driver = baseDriver.GetDriver();
 		login = new LoginPage(baseDriver);
 

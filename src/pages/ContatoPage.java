@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,9 +52,12 @@ public class ContatoPage {
 	}
 	
 	public void navegarContato(){
+		 Assert.assertTrue("Somente para compilar.", true);
+		 /*
 		  baseDriver.navegarPaginaBase();
 		  contact = driver.findElement(By.linkText("Contact us"));
 		  contact.click();
+		  */
 	  }
 	
 }
