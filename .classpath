@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="libs"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="src/libs/selenium-java-3.3.0.zip"/>
-	<classpathentry kind="lib" path="src/libs/selenium-server-standalone-3.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/alu201631416/workspace/QualidadeSoftware/libs/selenium-java-3.3.0.zip"/>
+	<classpathentry kind="lib" path="C:/Users/alu201631416/workspace/QualidadeSoftware/libs/selenium-server-standalone-3.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
