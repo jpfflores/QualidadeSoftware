@@ -14,7 +14,7 @@ import org.junit.Assert;
 import pages.LoginPage;
 import pages.MasterPage;
 
-public class LoginTeste extends MasterPage {
+public class LoginTest extends MasterPage {
 	private LoginPage login;
 	private StringBuffer verificationErrors = new StringBuffer();
 	private boolean acceptNextAlert = true;
@@ -27,7 +27,7 @@ public class LoginTeste extends MasterPage {
 		navigateBaseTestPage();
 	}
 
-	public LoginTeste() {
+	public LoginTest() {
 		login = new LoginPage();
 
 	}

@@ -14,11 +14,11 @@ import org.junit.Assert;
 import pages.RemoveCarrinhoPage;
 
 
-public class RemoveCarrinho {
+public class RemoveCarrinhoTest {
 	RemoveCarrinhoPage carrinho; 
 	
 	
-	public RemoveCarrinho(){
+	public RemoveCarrinhoTest(){
 		carrinho = new RemoveCarrinhoPage();
 		
 	}

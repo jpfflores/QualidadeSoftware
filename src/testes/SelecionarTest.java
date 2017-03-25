@@ -2,51 +2,48 @@ package testes;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.*;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-public class AlterarCadastroTeste {
+import pages.SelecionaProdutoPage;
+
+public class SelecionarTest {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
-
+  private SelecionaProdutoPage compra; 
   @Before
   public void setUp() throws Exception {
+	System.setProperty("webdriver.firefox.marionette","C:\\Users\\alu201631416\\workspace\\geckodriver-v0.15.0-win64\\geckodriver.exe");  
+	  
     driver = new FirefoxDriver();
     baseUrl = "http://automationpractice.com/index.php";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
-  public void testAlterarCadastroTeste() throws Exception {
-    driver.get(baseUrl + "/index.php?controller=my-account");
-    driver.findElement(By.cssSelector("a[title=\"Information\"] > span")).click();
-    driver.findElement(By.id("id_gender1")).click();
-    driver.findElement(By.id("firstname")).clear();
-    driver.findElement(By.id("firstname")).sendKeys("Tester");
-    driver.findElement(By.id("lastname")).clear();
-    driver.findElement(By.id("lastname")).sendKeys("Test");
-    driver.findElement(By.id("email")).clear();
-    driver.findElement(By.id("email")).sendKeys("teste@teste.com.uk");
-    new Select(driver.findElement(By.id("days"))).selectByVisibleText("regexp:1\\s+");
-    driver.findElement(By.cssSelector("option[value=\"1\"]")).click();
-    new Select(driver.findElement(By.id("months"))).selectByVisibleText("regexp:January\\s");
-    driver.findElement(By.cssSelector("#months > option[value=\"1\"]")).click();
-    new Select(driver.findElement(By.id("years"))).selectByVisibleText("regexp:2017\\s+");
-    driver.findElement(By.cssSelector("option[value=\"2017\"]")).click();
-    driver.findElement(By.name("submitIdentity")).click();
-    driver.findElement(By.id("old_passwd")).clear();
-    driver.findElement(By.id("old_passwd")).sendKeys("teste");
-    driver.findElement(By.id("passwd")).clear();
-    driver.findElement(By.id("passwd")).sendKeys("tester");
-    driver.findElement(By.id("confirmation")).clear();
-    driver.findElement(By.id("confirmation")).sendKeys("tester");
-    driver.findElement(By.name("submitIdentity")).click();
+  public void testSelecionarTesteJava() throws Exception {
+    compra = new SelecionaProdutoPage();
+    WebElement element = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
+    element.sendKeys(Keys.TAB);
+    driver.findElement(By.linkText("Blouses")).click();
+
+    //Elements not visible cannot be used
+    // driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a")).click();  //invisible
+    driver.findElement(By.xpath("//*[@id='layered_id_attribute_group_1']")).click();
+    driver.findElement(By.id("color_8")).click();
+    driver.findElement(By.name("Submit")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [selectWindow | null | ]]
+    driver.findElement(By.xpath("//div[@id='layer_cart']/div/div[2]/div[4]/span/span")).click();
   }
 
   @After

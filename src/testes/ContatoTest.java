@@ -5,7 +5,7 @@ import org.junit.Before;
 import pages.ContatoPage;
 import pages.LoginPage;
 
-public class ContatoTeste {
+public class ContatoTest {
 	private ContatoPage contato;
 	
 	@Before
@@ -16,7 +16,7 @@ public class ContatoTeste {
 		navigateBaseTestPage();
 	}
 	
-	public ContatoTeste() {
+	public ContatoTest() {
 		contato = new ContatoPage();
 
 	}

@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import pages.SelecionaProdutoPage;
 import system.Driver;
 
-public class AdicionaCarrinhoTeste {
+public class AdicionaCarrinhoTest {
   private Driver baseDriver;
   private WebDriver driver;
   private String baseUrl;
