@@ -22,8 +22,7 @@ public class AdicionaCarrinhoTest {
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
-  private SelecionaProdutoPage compra;
-
+  
   @Before
   public void setUp() throws Exception {
 	baseDriver = new Driver();  
