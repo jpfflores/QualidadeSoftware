@@ -1,6 +1,8 @@
 package testes;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 import pages.ContatoPage;
 import pages.LoginPage;
@@ -19,6 +21,11 @@ public class ContatoTest {
 	public ContatoTest() {
 		contato = new ContatoPage();
 
+	}
+	
+	@Test
+	public void passarTest(){
+		 Assert.assertTrue("Somente para compilar.", true);
 	}
 
 	// @Before

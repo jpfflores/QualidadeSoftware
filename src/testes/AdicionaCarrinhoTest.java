@@ -33,7 +33,7 @@ public class AdicionaCarrinhoTest {
 
   @Test
   public void testAdicionaCarrinhoTesteJava() throws Exception {
-	  
+	  Assert.assertTrue("Somente para compilar.", true);
     
   }
 

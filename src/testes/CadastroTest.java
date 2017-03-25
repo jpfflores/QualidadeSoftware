@@ -39,7 +39,7 @@ public class CadastroTest {
   }
 
   @Test
-  public void testCadastrarCliente() throws Exception {
+  public void testCadastrarClienteTest() throws Exception {
 		CadastroPage cadastro = new CadastroPage();
 		cadastro.navigateCadastrarUsuario();
 		cadastro.carregaCadastro();
