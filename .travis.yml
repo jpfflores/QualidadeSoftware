@@ -26,7 +26,7 @@ before_script:
     - env XVFB=/usr/bin/Xvfb
     - env XVFBARGS=":10 -screen 1 1024x768x24 -ac +extension GLX +extension RANDR +render -noreset"
     - env PIDFILE=/var/run/xvfb.pid
-    - exec start-stop-daemon --start --quiet --make-pidfile --pidfile $PIDFILE --exec $XVFB -- $XVFBARGS >> /var/log/xvfb.log 2>&1
+    - exec start-stop-daemon --start --quiet --make-pidfile --pidfile $PIDFILE --exec $XVFB -- $XVFBARGS 2>&1
     - sleep 3 # give xvfb some time to start
 
 
