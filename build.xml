@@ -10,6 +10,23 @@
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
     </path>
+	<!--
+    <path id="classpath.base">
+        <pathelement location="lib/selenium-server-standalone-3.0.0.jar"/>
+        <pathelement location="lib/selenium-java"/>
+
+        <pathelement location="lib/allure-java-annotations-1.4.23.HOTFIX1.jar"/>
+        <pathelement location="lib/allure-junit-adaptor-1.4.23.HOTFIX1.jar"/>
+        <pathelement location="resources"/>
+    </path>
+
+    <path id="classpath.test">
+        <pathelement location="lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="lib/junit-4.12.jar"/>
+        <pathelement location="${dir.build}"/>
+        <path refid="classpath.base"/>
+    </path>
+    -->	
     <path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
 
     <target name="clean">
@@ -32,20 +49,8 @@
          <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}" />
     </target>
 
-	<target name="start-selenium" depends="jar">
-		<exec executable="Xvfb" spawn="true">
-			<arg line=" :99 -ac -noreset -screen 0 1024x768x24" />
-		</exec>
-		<exec executable="java" spawn="true">
-			<env key="DISPLAY" value=":99" />
-			<arg line="-jar ${env.SELENIUM} -log ${basedir}/build/logs/selenium.log -browserSessionReuse" />
-		</exec>
-		<sleep seconds="3"/>
-	</target>
-
-			
-    <target name="test" depends="start-selenium">
-        <junit printsummary="yes" haltonfailure="yes" showoutput="true" >
+	<target name="test" depends="jar">
+        <junit printsummary="yes" haltonfailure="yes" > <!--showoutput="true" -->
             <classpath>
                 <path refid="classpath"/>
                 <path refid="application"/>
