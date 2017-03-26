@@ -19,8 +19,13 @@ public class Driver {
 		//DesiredCapabilities capabilities=DesiredCapabilities.firefox();
 		//capabilities.setCapability("marionette", true);
 	    //driver = new FirefoxDriver(capabilities);
-		
-		System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+		String OS = System.getProperty("os.name").toLowerCase();
+
+		if(OS.indexOf("win") >= 0){
+			System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
+		} else {
+			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+		}
 		driver = new ChromeDriver();
 	    baseUrl = "http://automationpractice.com/index.php";
 	    driver.get(baseUrl);
