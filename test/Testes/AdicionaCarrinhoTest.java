@@ -25,11 +25,14 @@ public class AdicionaCarrinhoTest {
   
   @Before
   public void setUp() throws Exception {
-	baseDriver = Driver.getInstance();  
-    driver = baseDriver.GetDriver();
 
   }
 
+  public AdicionaCarrinhoTest(){
+		baseDriver = Driver.getInstance();  
+	    driver = baseDriver.GetDriver();
+	  
+  }
   @Test
   public void testAdicionaCarrinhoTesteJava() throws Exception {
 	  Assert.assertTrue("Somente para compilar.", true);
