@@ -23,7 +23,7 @@ install:
 before_script:
     - "export DISPLAY=:99.0"
     #- "sh -e /etc/init.d/xvfb start"
-    - Xvfb :99 &
+    - Xvfb :99 -screen 1 1024x768x24 -ac +extension GLX +extension RANDR +render -noreset &
     - export DISPLAY=:99
     #- env XVFB=/usr/bin/Xvfb
     #- env XVFBARGS=":10 -screen 1 1024x768x24 -ac +extension GLX +extension RANDR +render -noreset"
