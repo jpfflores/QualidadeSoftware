@@ -14,7 +14,7 @@ install:
    #- unzip chromedriver_linux64.zip
    - tar -vzxf geckodriver-v0.15.0-linux64.tar.gz
    - sudo apt-get install libnss3
-   #- sudo apt-get --only-upgrade install chromium-browser
+   - sudo apt-get --only-upgrade install firefox
    #- sudo cp chromedriver /usr/local/bin/.
    - sudo cp geckodriver /usr/local/bin/.
    #- sudo chmod +x /usr/local/bin/chromedriver
