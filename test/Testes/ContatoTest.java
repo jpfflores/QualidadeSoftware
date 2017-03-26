@@ -33,7 +33,7 @@ public class ContatoTest {
 	
 	public ContatoTest() {
 		baseDriver = Driver.getInstance();
-		driver = baseDriver.GetDriver();
+		//driver = baseDriver.GetDriver();
 		contato = new ContatoPage(baseDriver);
 
 	}

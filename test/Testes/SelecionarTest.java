@@ -25,10 +25,13 @@ public class SelecionarTest {
   private SelecionaProdutoPage compra; 
   @Before
   public void setUp() throws Exception {
-	  baseDriver = Driver.getInstance();
-	  driver = baseDriver.GetDriver();
   }
 
+  public SelecionarTest(){
+	  baseDriver = Driver.getInstance();
+	  driver = baseDriver.GetDriver();
+	  
+  }
   @Test
   public void testSelecionarTesteJavaTest() throws Exception {
 	  compra = new SelecionaProdutoPage(baseDriver);
