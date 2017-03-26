@@ -20,11 +20,12 @@ public class Driver {
 			System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
 			driver = new ChromeDriver();
 		} else {
-			//System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
-			System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
+			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+			/*System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 			DesiredCapabilities capabilities=DesiredCapabilities.firefox();
 			capabilities.setCapability("marionette", true);
-			driver = new FirefoxDriver(capabilities);
+			driver = new FirefoxDriver(capabilities);*/
+			driver = new ChromeDriver();
 		}
 		
 	    baseUrl = "http://automationpractice.com/index.php";
