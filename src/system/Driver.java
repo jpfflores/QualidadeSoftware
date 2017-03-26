@@ -24,7 +24,7 @@ public class Driver {
 		if(OS.indexOf("win") >= 0){
 			System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
 		} else {
-			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver_linux64.zip");
 		}
 		driver = new ChromeDriver();
 	    baseUrl = "http://automationpractice.com/index.php";
