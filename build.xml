@@ -13,7 +13,7 @@
 
     <path id="classpath.test">
         <pathelement location="lib/selenium-server-standalone-3.0.0.jar"/>
-        <pathelement location="/usr/local/bin/chromedriver/chromedriver"/>
+        <pathelement location="/usr/local/bin/chromedriver"/>
         <pathelement location="${build.dir}"/>
         <path refid="classpath.base"/>
     </path>
