@@ -3,8 +3,6 @@ package system;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.chrome.*;
 
 public class Driver {
@@ -14,17 +12,12 @@ public class Driver {
 	
 	private Driver(){
 		
-		//System.setProperty("webdriver.firefox.marionette","C:\\Users\\Achronys\\workspace\\geckodriver-v0.15.0-win64\\geckodriver.exe");
-		//System.setProperty("webdriver.gecko.driver", "C:\\Users\\Achronys\\workspace\\geckodriver-v0.15.0-win64\\" + "geckodriver.exe");
-		//DesiredCapabilities capabilities=DesiredCapabilities.firefox();
-		//capabilities.setCapability("marionette", true);
-	    //driver = new FirefoxDriver(capabilities);
 		String OS = System.getProperty("os.name").toLowerCase();
 
 		if(OS.indexOf("win") >= 0){
 			System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
 		} else {
-			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver_linux64.zip");
+			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 		}
 		driver = new ChromeDriver();
 	    baseUrl = "http://automationpractice.com/index.php";
