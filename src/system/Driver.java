@@ -27,12 +27,20 @@ public class Driver {
 			//System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
 			//driver = new ChromeDriver();
 		} else {
-			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+			
 			/*System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 			DesiredCapabilities capabilities=DesiredCapabilities.firefox();
 			capabilities.setCapability("marionette", true);
 			driver = new FirefoxDriver(capabilities);*/
+			/* 
+			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 			driver = new ChromeDriver();
+			*/
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "/usr/local/bin/phantomjs");                  
+			driver = new PhantomJSDriver(caps);
+			
+			
 		}
 		
 	    baseUrl = "http://automationpractice.com/index.php";
