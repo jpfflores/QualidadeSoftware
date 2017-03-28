@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Driver {
@@ -17,8 +19,13 @@ public class Driver {
 		String OS = System.getProperty("os.name").toLowerCase();
 
 		if(OS.indexOf("win") >= 0){
-			System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
-			driver = new ChromeDriver();
+			
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");                  
+			driver = new PhantomJSDriver(caps);
+			
+			//System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
+			//driver = new ChromeDriver();
 		} else {
 			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 			/*System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");

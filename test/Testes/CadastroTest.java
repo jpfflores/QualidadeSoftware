@@ -1,6 +1,5 @@
 package Testes;
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.*;
@@ -9,14 +8,13 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.CadastroPage;
 import system.Driver;
 
 public class CadastroTest {
-	Driver baseDriver;
+  Driver baseDriver;
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -38,10 +36,6 @@ public class CadastroTest {
   }
   
 
-  public void CadastroTeste() throws Exception {
-   
-  }
-
   @Test
   public void testCadastrarClienteTest() throws Exception {
 		CadastroPage cadastro = new CadastroPage(baseDriver);
@@ -55,11 +49,11 @@ public class CadastroTest {
 		
   }
   
-  /*
+  
   
   @Test
   public void testAlterarCadastro() throws Exception {
-	CadastroPage cadastro = new CadastroPage();
+	CadastroPage cadastro = new CadastroPage(baseDriver);
 	cadastro.digitaTexto(cadastro.getFirstName(), "Jason");
 	cadastro.digitaTexto(cadastro.getLastName(), "Bourne");
 	cadastro.getGender().click();
@@ -79,11 +73,11 @@ public class CadastroTest {
     driver.findElement(By.id("passwd")).clear();
     driver.findElement(By.id("passwd")).sendKeys("tester");
     driver.findElement(By.id("confirmation")).clear();
-    login.digitaTexto(login.getUser(), "teste@teste.com");
+    //login.digitaTexto(login.getUser(), "teste@teste.com");
     driver.findElement(By.id("confirmation")).sendKeys("tester");
     driver.findElement(By.name("submitIdentity")).click();
   }
-  */
+  
   
   @After
   public void tearDown() throws Exception {

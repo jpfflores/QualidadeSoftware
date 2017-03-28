@@ -46,6 +46,7 @@ public class LoginTest extends MasterPage {
 		login.carregaObjetosPaginaLogin();
 	}
 
+	
 	public void testeLoginCorreto() throws Exception {
 		// login.navegarLogin();
 		// login.carregaObjetosPaginaLogin();
@@ -67,6 +68,15 @@ public class LoginTest extends MasterPage {
 		
 	}
 
+	@Test
+	public void testeLoginUsuarioJaExistente() throws Exception {
+		login.digitaTexto(login.getUser(), "teste@teste.com");
+		login.digitaTexto(login.getPassword(), "teste");
+		login.getSubmit().click();
+		
+		Assert.assertNotNull(login.getAlert());
+		
+	}	
 	@After
 	public void tearDown() throws Exception {
 		//driver.close();
