@@ -55,6 +55,13 @@ public class RemoveCarrinhoTest {
 		 Assert.assertTrue("Somente para compilar.", true);
 	}
 
+	@Test
+	public void testeRemoveUmItemCarrinho(){
+		//carrinho.navegaPaginaInicial();
+		carrinho = new RemoveCarrinhoPage(baseDriver);
+		 Assert.assertTrue("Somente para compilar.", true);
+	}
+	
 	@After
 	public void tearDown() throws Exception {
 		//driver.close();

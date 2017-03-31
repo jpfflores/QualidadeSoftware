@@ -11,6 +11,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.CadastroPage;
+import pages.LoginPage;
 import system.Driver;
 
 public class CadastroTest {
@@ -35,7 +36,17 @@ public class CadastroTest {
 	  
   }
   
-
+  @Test
+  public void testCadastroJaExistente() throws Exception {
+	  LoginPage login = new LoginPage();
+	  login.digitaTexto(login.getEmail(), "teste@teste.com");
+	  login.getSubmit().click();
+		
+	  Assert.assertNotNull(login.getAlert());
+			
+	
+  }
+  
   @Test
   public void testCadastrarClienteTest() throws Exception {
 		CadastroPage cadastro = new CadastroPage(baseDriver);
@@ -49,10 +60,8 @@ public class CadastroTest {
 		
   }
   
-  
-  
   @Test
-  public void testAlterarCadastro() throws Exception {
+  public void testAlterarCadastroSucesso() throws Exception {
 	CadastroPage cadastro = new CadastroPage(baseDriver);
 	Assert.assertTrue("Somente para compilar.", true);
 	/* base para inserir os dados
@@ -81,6 +90,20 @@ public class CadastroTest {
     */
   }
   
+  @Test
+  public void testAlterarCadastroFaltaCampoObrigatorio() throws Exception {
+
+  }
+
+  @Test
+  public void testAlterarCadastroTelefoneInvalido() throws Exception {
+
+  }
+
+  @Test
+  public void testAlterarCadastroConfirmacaoSenhaErrada() throws Exception {
+
+  }
   
   @After
   public void tearDown() throws Exception {

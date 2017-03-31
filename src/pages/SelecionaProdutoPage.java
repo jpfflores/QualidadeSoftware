@@ -1,7 +1,10 @@
 package pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import system.Driver;
@@ -10,7 +13,15 @@ import system.Driver;
 public class SelecionaProdutoPage {
 	private Driver baseDriver;
 	private WebDriver driver;
+	private WebElement menuWomen;
+	private WebElement menuDresses;
+	private WebElement menuTshirts;
+	private WebElement subMenuTshirts;	
+	private WebElement subMenuBlousesTshirts;	
 	private WebElement checkCategoriesTops;
+	private WebElement menuCasualDresses;
+	private WebElement menuEveningDresses;
+	private WebElement menuSummerDresses;
 	private WebElement checkCategoriesDresses;
 	private WebElement checkCategoriesTShirts;
 	private WebElement checkCategoriesBlouses;
@@ -43,8 +54,20 @@ public class SelecionaProdutoPage {
 		//"layered_id_attribute_group_8"));
 	}
 	
-	public void CarregaWomen(){
-		
+	public void SelecionaSubMenuTShirtsWomen(){
+		menuWomen = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/a"));
+		Actions builder = new Actions(driver);
+		builder.moveToElement(menuWomen).perform();
+		this.menuTshirts = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[1]/a"));
+		menuTshirts.click();
+	}
+
+	public void SelecionaSubMenuBlousesWomen(){
+		menuWomen = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/a"));
+		Actions builder = new Actions(driver);
+		builder.moveToElement(menuWomen).perform();
+		this.menuTshirts = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a"));
+		menuTshirts.click();
 	}
 	
 	public void CarregaDresses(){

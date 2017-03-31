@@ -33,24 +33,11 @@ public class SelecionarTest {
 	  
   }
   @Test
-  public void testSelecionarTesteJavaTest() throws Exception {
+  public void testSelecionarTShirt() throws Exception {
 	  compra = new SelecionaProdutoPage(baseDriver);
-	  
+	  compra.SelecionaSubMenuTShirtsWomen();
 	  Assert.assertTrue("Somente para compilar.", true);
-	  /*
-	  compra = new SelecionaProdutoPage();
-    WebElement element = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
-    element.sendKeys(Keys.TAB);
-    driver.findElement(By.linkText("Blouses")).click();
 
-    //Elements not visible cannot be used
-    // driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a")).click();  //invisible
-    driver.findElement(By.xpath("//*[@id='layered_id_attribute_group_1']")).click();
-    driver.findElement(By.id("color_8")).click();
-    driver.findElement(By.name("Submit")).click();
-    // ERROR: Caught exception [ERROR: Unsupported command [selectWindow | null | ]]
-    driver.findElement(By.xpath("//div[@id='layer_cart']/div/div[2]/div[4]/span/span")).click();
-    */
   }
 
   @After

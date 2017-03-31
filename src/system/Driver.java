@@ -21,11 +21,11 @@ public class Driver {
 		if(OS.indexOf("win") >= 0){
 			
 			DesiredCapabilities caps = new DesiredCapabilities();
-			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");                  
-			driver = new PhantomJSDriver(caps);
+			//caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");                  
+			//driver = new PhantomJSDriver(caps);
 			
-			//System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
-			//driver = new ChromeDriver();
+			System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
+			driver = new ChromeDriver();
 		} else {
 			
 			/*System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
