@@ -86,7 +86,7 @@ public class SelecionaProdutoPage extends MasterPage{
 	public SelecionaProdutoPage(Driver baseD){
 		baseDriver = baseD;
 		driver = baseDriver.GetDriver();
-		// estes elementos sempre estarão na página
+		// estes elementos sempre estarao na pagina
 		search = driver.findElement(By.id("search_query_top"));
 		searchButton = driver.findElement(By.xpath("//*[@id='searchbox']/button"));
 
