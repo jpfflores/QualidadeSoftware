@@ -77,7 +77,8 @@ public class LoginPage extends MasterPage{
 	
 	public WebElement getAlert(){
 //		alert = driver.findElement(By.className("alert alert-danger"));
-		alert = driver.findElement(By.xpath("//*[@id='center_column']/div[1]/ol/li"));
+		alert = driver.findElement(By.linkText("Authentication failed"));
+		//alert = driver.findElement(By.xpath("//*[@id='center_column']/div[1]/ol/li"));
 		return alert;
 		
 	}

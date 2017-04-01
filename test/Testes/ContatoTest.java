@@ -39,13 +39,22 @@ public class ContatoTest {
 	}
 	
 	@Test
-	public void passarTest(){
+	public void testeEnvio(){
 		contato.navegarContato();
 		contato.carregarContatoPage();
 		
 		Assert.assertTrue("Somente para compilar.", true);
 	}
 
+	@Test
+	public void testeEnvioCampoObrigatiorVazio(){
+		contato.navegarContato();
+		contato.carregarContatoPage();
+		
+		Assert.assertTrue("Somente para compilar.", true);
+	}
+	
+	
 	// @Before
 	public void navigateBaseTestPage() {
 		contato.navegarContato();
