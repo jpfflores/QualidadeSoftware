@@ -45,7 +45,7 @@ public class Driver {
 		
 	    baseUrl = "http://automationpractice.com/index.php";
 	    driver.get(baseUrl);
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
 	
 	public static synchronized Driver getInstance(){

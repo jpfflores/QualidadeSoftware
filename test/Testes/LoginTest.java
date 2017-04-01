@@ -40,26 +40,17 @@ public class LoginTest extends MasterPage {
 
 	}
 
-	// @Before
-	public void navigateBaseTestPage() {
+
+	public void navigateBaseTestPage() throws Exception {
+		login.executaLogout();
 		login.navegarLogin();
 		login.carregaObjetosPaginaLogin();
 	}
 
 	
-	public void testeLoginCorreto() throws Exception {
-		// login.navegarLogin();
-		// login.carregaObjetosPaginaLogin();
-		 Assert.assertTrue("Somente para compilar.", true);
-		/*login.digitaTexto(login.getUser(), "teste@teste.com");
-		login.digitaTexto(login.getPassword(), "teste");
-
-		login.getSubmit().click();
-		Assert.assertNotNull(login.getAlert());*/
-	}
-
 	@Test
 	public void testeLoginSenhaErrada() throws Exception {
+		navigateBaseTestPage();
 		login.digitaTexto(login.getUser(), "teste@teste.com");
 		login.digitaTexto(login.getPassword(), "errado");
 		login.getSubmit().click();
@@ -67,7 +58,16 @@ public class LoginTest extends MasterPage {
 		Assert.assertNotNull(login.getAlert());
 		
 	}
-
+	
+	@Test
+	public void testeLoginCorreto() throws Exception {
+		navigateBaseTestPage();
+		login.digitaTexto(login.getUser(), "teste@teste.com");
+		login.digitaTexto(login.getPassword(), "teste");
+		login.getSubmit().click();
+		
+		Assert.assertNotNull(login.getSuccess());
+	}	
 
 	@After
 	public void tearDown() throws Exception {

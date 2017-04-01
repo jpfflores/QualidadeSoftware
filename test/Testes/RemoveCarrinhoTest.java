@@ -12,60 +12,63 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.junit.Assert;
 
-import pages.RemoveCarrinhoPage;
+import pages.CartPage;
 import system.Driver;
-
 
 public class RemoveCarrinhoTest {
 	private Driver baseDriver;
-	  private WebDriver driver;
-		private String baseUrl;
-		private boolean acceptNextAlert = true;
-		private StringBuffer verificationErrors = new StringBuffer();
-		
-	RemoveCarrinhoPage carrinho; 
-	
-	
-	public RemoveCarrinhoTest(){
+	private WebDriver driver;
+	private String baseUrl;
+	private boolean acceptNextAlert = true;
+	private StringBuffer verificationErrors = new StringBuffer();
+
+	CartPage carrinho;
+
+	public RemoveCarrinhoTest() {
 		baseDriver = Driver.getInstance();
 		driver = baseDriver.GetDriver();
-		//carrinho = new RemoveCarrinhoPage();
-		
+		// carrinho = new RemoveCarrinhoPage();
+
 	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 		// cada teste deve verificar a existencia de um elemento de verificacao
 		// O elemento pode ser um texto de erro um objeto que so aparece depois
 		// do login
-		//carrinho.navegaPaginaInicial();
-	}
-
-
-	@Test
-	public void testeEsvaziaCarrinhoComItensTest(){
-		//carrinho.navegaPaginaInicial();
-		carrinho = new RemoveCarrinhoPage(baseDriver);
-		 Assert.assertTrue("Somente para compilar.", true);
-	}
-	
-	@Test
-	public void testeEsvaziaCarrinhoSemItensTest(){
-		//carrinho.navegaPaginaInicial();
-		 Assert.assertTrue("Somente para compilar.", true);
+		// carrinho.navegaPaginaInicial();
 	}
 
 	@Test
-	public void testeRemoveUmItemCarrinho(){
-		//carrinho.navegaPaginaInicial();
-		carrinho = new RemoveCarrinhoPage(baseDriver);
-		 Assert.assertTrue("Somente para compilar.", true);
+	public void testeEsvaziaCarrinhoComItensTest() {
+		// carrinho.navegaPaginaInicial();
+		carrinho = new CartPage(baseDriver);
+		//carrinho.montaObjeto();
+
+		Assert.assertTrue("Somente para compilar.", true);
 	}
-	
+
+	@Test
+	public void testeEsvaziaCarrinhoSemItensTest() {
+		int localQuantity = 0;
+		carrinho = new CartPage(baseDriver);
+		localQuantity = carrinho.GetQuantityValue();
+		carrinho.carregaSumarioCarrinho();
+		Assert.assertNotNull(carrinho.getEmptyPage());
+
+	}
+
+	@Test
+	public void testeRemoveUmItemCarrinho() {
+		// carrinho.navegaPaginaInicial();
+		carrinho = new CartPage(baseDriver);
+		Assert.assertTrue("Somente para compilar.", true);
+	}
+
 	@After
 	public void tearDown() throws Exception {
-		//driver.close();
-		//driver.quit();
+		// driver.close();
+		// driver.quit();
 		String verificationErrorString = verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
 			fail(verificationErrorString);

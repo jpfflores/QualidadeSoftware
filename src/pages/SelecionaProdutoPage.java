@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import system.Driver;
 
 
-public class SelecionaProdutoPage {
+public class SelecionaProdutoPage extends MasterPage{
 	private Driver baseDriver;
 	private WebDriver driver;
 	private WebElement menuWomen;
@@ -47,11 +47,49 @@ public class SelecionaProdutoPage {
 	private WebElement checkStylesDressy;
 	private WebElement checkStylesGirly;
 	
+	private WebElement search;
+	private WebElement searchButton;
+	private WebElement searchAlert;
+	private WebElement searchFound;
 	
+	public WebElement getSearch(){
+		return search;
+		
+	}
+	
+	public WebElement getSearchButton(){
+		return searchButton;
+		
+	}
+	
+	public WebElement getSearchAlert(){
+		searchAlert = driver.findElement(By.className("heading-counter"));
+		if(searchAlert == null){
+			return null;
+		}
+		else {
+			
+		
+			if (searchAlert.getText().contains("0 results have been found."))
+				return searchAlert;
+			else
+				return null;
+		}
+	}
+
+	public WebElement getSearchFound(){
+		searchFound = driver.findElement(By.className("compare-form"));
+		return searchFound;
+		
+	}
+		
 	public SelecionaProdutoPage(Driver baseD){
 		baseDriver = baseD;
 		driver = baseDriver.GetDriver();
-		//"layered_id_attribute_group_8"));
+		// estes elementos sempre estarão na página
+		search = driver.findElement(By.id("search_query_top"));
+		searchButton = driver.findElement(By.xpath("//*[@id='searchbox']/button"));
+
 	}
 	
 	public void SelecionaSubMenuTShirtsWomen(){
@@ -82,5 +120,5 @@ public class SelecionaProdutoPage {
 		
 	}
 
-
+	
 }

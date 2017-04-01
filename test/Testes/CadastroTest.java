@@ -38,7 +38,7 @@ public class CadastroTest {
   
   @Test
   public void testCadastroJaExistente() throws Exception {
-	  LoginPage login = new LoginPage();
+	  LoginPage login = new LoginPage(baseDriver);
 	  login.navegarLogin();
 	  login.carregaObjetosPaginaLogin();
 	  login.digitaTexto(login.getEmail(), "teste@teste.com");
