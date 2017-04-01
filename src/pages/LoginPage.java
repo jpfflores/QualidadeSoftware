@@ -79,8 +79,8 @@ public class LoginPage extends MasterPage {
 				logout.click();
 			}
 		} catch (NoSuchElementException exc) {
-			// Pode não encontrar se não estiver logado
-		 
+			// Pode nao encontrar se nao estiver logado
+			return;
 		} catch (Exception ex){
 			// Erro fatal
 			throw new Exception();
