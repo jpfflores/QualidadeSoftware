@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
+//import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -19,8 +19,8 @@ public class Driver {
 		String OS = System.getProperty("os.name").toLowerCase();
 
 		if(OS.indexOf("win") >= 0){
-			
-			DesiredCapabilities caps = new DesiredCapabilities();
+			// Using phantomjs
+			//DesiredCapabilities caps = new DesiredCapabilities();
 			//caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");                  
 			//driver = new PhantomJSDriver(caps);
 			

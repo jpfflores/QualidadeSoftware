@@ -37,6 +37,7 @@ public class SelecionarTest {
 
 	@Test
 	public void testBuscaProdutoSucesso() throws Exception {
+		
 		compra.digitaTexto(compra.getSearch(), "Printed");
 		compra.getSearchButton().click();
 		Assert.assertNotNull(compra.getSearchFound());

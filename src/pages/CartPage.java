@@ -6,8 +6,9 @@ import org.openqa.selenium.support.ui.Select;
 
 import system.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 
-public class CartPage {
+public class CartPage extends MasterPage{
 	private Driver baseDriver;
 	private WebDriver driver;
 
@@ -44,19 +45,25 @@ public class CartPage {
 	public CartPage(Driver baseD) {
 		baseDriver = baseD;
 		driver = baseDriver.GetDriver();
-		quantity = driver.findElement(By.className("ajax_cart_quantity"));
 		cart = driver.findElement(By.className("shopping_cart"));
-		empty = driver.findElement(By.className("cart_block_no_products unvisible")); // Vazio
 
 	}
 
 	public void montaCarrinho() {
+		mostraMenuEscondido(cart,driver);
+		quantity = driver.findElement(By.className("ajax_cart_quantity"));
+		empty = driver.findElement(By.className("ajax_cart_no_product")); // Vazio
 
 	}
 
 	public void carregaSumarioCarrinho() {
 		cart.click();
+		try{
 		emptyPage = driver.findElement(By.className("alert alert-warning"));
+		} catch (NoSuchElementException exc) {
+			
+		}
+		
 	}
 
 	public void navegaPaginaInicial() {

@@ -2,6 +2,8 @@ package Testes;
 
 import static org.junit.Assert.fail;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +16,9 @@ import org.junit.Assert;
 
 import pages.CartPage;
 import system.Driver;
+import pages.SelecionaProdutoPage;
 
-public class RemoveCarrinhoTest {
+public class CarrinhoTest {
 	private Driver baseDriver;
 	private WebDriver driver;
 	private String baseUrl;
@@ -24,7 +27,7 @@ public class RemoveCarrinhoTest {
 
 	CartPage carrinho;
 
-	public RemoveCarrinhoTest() {
+	public CarrinhoTest() {
 		baseDriver = Driver.getInstance();
 		driver = baseDriver.GetDriver();
 		// carrinho = new RemoveCarrinhoPage();
@@ -40,31 +43,41 @@ public class RemoveCarrinhoTest {
 	}
 
 	@Test
-	public void testeEsvaziaCarrinhoComItensTest() {
+	public void testeEsvaziaCarrinhoSemItens() {
 		// carrinho.navegaPaginaInicial();
 		carrinho = new CartPage(baseDriver);
-		//carrinho.montaObjeto();
-
-		Assert.assertTrue("Somente para compilar.", true);
-	}
-
-	@Test
-	public void testeEsvaziaCarrinhoSemItensTest() {
-		int localQuantity = 0;
-		carrinho = new CartPage(baseDriver);
-		localQuantity = carrinho.GetQuantityValue();
-		carrinho.carregaSumarioCarrinho();
-		Assert.assertNotNull(carrinho.getEmptyPage());
+		carrinho.montaCarrinho();
+		Assert.assertNotNull(carrinho.getEmpty());
+		//Assert.assertTrue("Somente para compilar.", true);
 
 	}
 
 	@Test
 	public void testeRemoveUmItemCarrinho() {
-		// carrinho.navegaPaginaInicial();
+		// Compra dois itens
 		carrinho = new CartPage(baseDriver);
+		SelecionaProdutoPage compra = new SelecionaProdutoPage(baseDriver);
+		compra.digitaTexto(compra.getSearch(), "Printed");
+		compra.getSearchButton().click();
+		// Comprar Primeiro produto  
+		//*[@id="center_column"]/ul/li[1]/div/div[2]/div[2]/a[1]
+		
+		// Comprar segundo produto
+		//*[@id="center_column"]/ul/li[2]/div/div[2]/div[2]/a[1]
+		
+		//Remove um item
 		Assert.assertTrue("Somente para compilar.", true);
 	}
 
+	@Test
+	public void testeEsvaziaCarrinho() {
+		// Compra dois itens
+		carrinho = new CartPage(baseDriver);
+		
+		// Remove todos os itens
+		Assert.assertTrue("Somente para compilar.", true);
+	}
+	
 	@After
 	public void tearDown() throws Exception {
 		// driver.close();
