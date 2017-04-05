@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import junit.framework.Assert;
 import system.Driver;
 
 public class LoginPage extends MasterPage {
@@ -55,14 +56,14 @@ public class LoginPage extends MasterPage {
 		driver = baseDriver.GetDriver();
 	}
 
-	public void navegarLogin() {
+	public void navegarLogin() throws Exception {
+		executaLogout();
 		baseDriver.navegarPaginaBase();
 		login = driver.findElement(By.linkText("Sign in"));
 		login.click();
 	}
 
 	public void carregaObjetosPaginaLogin() {
-		// TODO Auto-generated method stub
 		user = driver.findElement(By.id("email"));
 		password = driver.findElement(By.id("passwd"));
 		submit = driver.findElement(By.id("SubmitLogin"));

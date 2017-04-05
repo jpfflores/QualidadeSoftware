@@ -38,19 +38,18 @@ public class CadastroTest {
   
   @Test
   public void testCadastroJaExistente() throws Exception {
-	  LoginPage login = new LoginPage(baseDriver);
+	  CadastroPage cadastro = new CadastroPage(baseDriver);
+	  LoginPage login = cadastro.getLogin();
 	  login.navegarLogin();
 	  login.carregaObjetosPaginaLogin();
 	  login.digitaTexto(login.getEmail(), "teste@teste.com");
 	  login.getSubmit().click();
-		
 	  Assert.assertNotNull(login.getAlert());
-			
 	
   }
   
   @Test
-  public void testCadastrarClienteTest() throws Exception {
+  public void testCadastrarCliente() throws Exception {
 		CadastroPage cadastro = new CadastroPage(baseDriver);
 		cadastro.navigateCadastrarUsuario();
 		cadastro.carregaCadastro();
@@ -59,37 +58,38 @@ public class CadastroTest {
 		cadastro.digitaTexto(cadastro.getLastName(), "Bourne");
 		cadastro.getGender().click();
 		cadastro.digitaTexto(cadastro.getPasswCadastro(), "teste");
-		
+		cadastro.getDays().selectByIndex(9);
+		cadastro.getMonths().selectByIndex(9);
+		cadastro.getYears().selectByIndex(35);
+		cadastro.digitaTexto(cadastro.getCompany(), "TestComp");
+		cadastro.getCountry().selectByIndex(0);
+		cadastro.digitaTexto(cadastro.getPhone(), "555444000");
+		cadastro.digitaTexto(cadastro.getAlias(), "Testing");
+		baseDriver.navegarPaginaBase();
+		Assert.assertTrue("Somente para compilar.", true);
   }
   
   @Test
   public void testAlterarCadastroSucesso() throws Exception {
 	CadastroPage cadastro = new CadastroPage(baseDriver);
-	Assert.assertTrue("Somente para compilar.", true);
-	/* base para inserir os dados
+	LoginPage login = new LoginPage(baseDriver);
+	login.navegarLogin();
+	login.carregaObjetosPaginaLogin();
+	login.digitaTexto(login.getUser(), "teste@teste.com");
+	login.digitaTexto(login.getPassword(), "teste");
+	login.getSubmit().click();
+	cadastro.carregaCadastroAlterar();
+	
+	// base para inserir os dados
 	cadastro.digitaTexto(cadastro.getFirstName(), "Jason");
 	cadastro.digitaTexto(cadastro.getLastName(), "Bourne");
-	cadastro.getGender().click();
-    driver.findElement(By.cssSelector("a[title=\"Information\"] > span")).click();
-    driver.findElement(By.id("id_gender1")).click();
-    driver.findElement(By.id("email")).clear();
-    driver.findElement(By.id("email")).sendKeys("teste@teste.com.uk");
-    new Select(driver.findElement(By.id("days"))).selectByVisibleText("regexp:1\\s+");
-    driver.findElement(By.cssSelector("option[value=\"1\"]")).click();
-    new Select(driver.findElement(By.id("months"))).selectByVisibleText("regexp:January\\s");
-    driver.findElement(By.cssSelector("#months > option[value=\"1\"]")).click();
-    new Select(driver.findElement(By.id("years"))).selectByVisibleText("regexp:2017\\s+");
-    driver.findElement(By.cssSelector("option[value=\"2017\"]")).click();
-    driver.findElement(By.name("submitIdentity")).click();
-    driver.findElement(By.id("old_passwd")).clear();
-    driver.findElement(By.id("old_passwd")).sendKeys("teste");
-    driver.findElement(By.id("passwd")).clear();
-    driver.findElement(By.id("passwd")).sendKeys("tester");
-    driver.findElement(By.id("confirmation")).clear();
-    //login.digitaTexto(login.getUser(), "teste@teste.com");
-    driver.findElement(By.id("confirmation")).sendKeys("tester");
-    driver.findElement(By.name("submitIdentity")).click();
-    */
+	cadastro.digitaTexto(cadastro.getOldPassword(), "teste");
+	cadastro.digitaTexto(cadastro.getEmail(), "teste@teste.com");
+	//cadastro.getGender().click();
+	cadastro.getSubmit().click();
+	Assert.assertNotNull(cadastro.getSuccessAlert());
+	//Assert.assertTrue("Somente para compilar.", true);
+    
   }
   
   @Test

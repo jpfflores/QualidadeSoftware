@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 public class CadastroPage extends MasterPage{
 	private Driver baseDriver;
 	private WebDriver driver;
+	private LoginPage login;
 	
 	//Cadastro
 	private WebElement title;
@@ -30,14 +32,13 @@ public class CadastroPage extends MasterPage{
 	private WebElement city;
 	private WebElement postCode;
 	private WebElement phone;
+	private WebElement alias;
 	private WebElement submit;
 	
 	//Correcao
 	private WebElement email;
 	private WebElement oldPassword;
 	private WebElement confirmation;
-
-	private LoginPage login;
 	
 	
 	public WebElement getTitle(){
@@ -68,6 +69,10 @@ public class CadastroPage extends MasterPage{
 		return years;
 	}
 	
+	public WebElement getCompany(){
+		return company;
+	}
+
 	public Select getCountry(){
 		return country;
 	}
@@ -104,24 +109,39 @@ public class CadastroPage extends MasterPage{
 		return oldPassword;
 	}
 
+	public WebElement getAlias(){
+		return alias;
+	}
+	
 	public WebElement getConfirmation(){
 		return confirmation;
 	}
-
+	public WebElement getSuccessAlert(){
+		WebElement element;
+		element = driver.findElement(By.cssSelector("*[class^='alert']"));
+		return element;
+				//By.className("alert-success"));
+	}
+		
+	public LoginPage getLogin(){
+		return login;
+	}
+	
 	public CadastroPage(Driver based){
 		baseDriver = based;
 		driver = baseDriver.GetDriver();
 		login = new LoginPage(baseDriver);
-
-		
 	}
 	
 	public void navigateCadastroPage(){
-		login.navegarLogin();
-		
+		try {
+			login.navegarLogin();
+		} catch(Exception ex){
+			Assert.assertFalse(true);
+		}
 	}
 	
-	public void navigateCadastrarUsuario(){
+	public void navigateCadastrarUsuario() throws Exception{
 		login.navegarLogin();
 		login.carregaObjetosPaginaLogin();
 		login.digitaTexto(login.getEmail(), "tester@tester.com.uk");
@@ -143,10 +163,12 @@ public class CadastroPage extends MasterPage{
 	    city = driver.findElement(By.id("city"));
 	    postCode = driver.findElement(By.id("postcode"));
 	    phone = driver.findElement(By.id("phone"));
+	    alias = driver.findElement(By.id("alias"));
 	    submit = driver.findElement(By.id("submitAccount"));
 	}
 	
 	public void carregaCadastroAlterar(){
+		//*[@id="center_column"]/div/div[1]/ul/li[4]/a
 	    driver.findElement(By.cssSelector("a[title=\"Information\"] > span")).click();
 	    gender = driver.findElement(By.id("id_gender1"));
 	    firstName = driver.findElement(By.id("firstname"));
@@ -158,14 +180,15 @@ public class CadastroPage extends MasterPage{
 	    oldPassword = driver.findElement(By.id("old_passwd"));
 	    passwAltera = driver.findElement(By.id("passwd"));
 	    confirmation = driver.findElement(By.id("confirmation"));
+	    
 	    submit = driver.findElement(By.name("submitIdentity"));		
 	}
 	
 	
 	public Select carregaSelect ( String label){
-		
 		WebElement element = driver.findElement(By.id(label));
 		return new Select(element);
 		//s.selectByVisibleText("Opcao");
 	}
+	
 }
