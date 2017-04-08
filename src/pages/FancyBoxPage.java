@@ -1,5 +1,13 @@
 package pages;
 
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import system.Driver;
+
 public class FancyBoxPage extends MasterPage{
 	/* This class controls two states of a window
 	 *  with very different components
@@ -7,6 +15,43 @@ public class FancyBoxPage extends MasterPage{
 	 * 
 	 */
 	
+	Driver baseDriver;
+	WebDriver driver;
+	SelecionaProdutoPage produto;
+	
+	private WebElement proceed;
+	private WebElement checkout;
+	private WebElement keepshop;
+	
+	public WebElement getAddToCart(){
+		try{
+			WebElement elemento = driver.findElement(By.xpath("//*[@id='center_column']/ul/li[1]/div/div[2]/div[2]/a[1]"));
+			return elemento;
+		} catch (Exception ex) {
+			return null;
+		}
+		
+		
+	}
+	
+	public WebElement getProceed(){
+		return proceed;
+	}
+	
+	public WebElement getCheckout(){
+		return checkout;
+	}
+
+	public WebElement getKeepshop(){
+		keepshop = driver.findElement(By.xpath("//*[@id='layer_cart']/div[1]/div[2]/div[4]/span/span/i"));
+		return keepshop;
+	}
+	
+	public FancyBoxPage(Driver baseD){
+		baseDriver = baseD;
+		driver = baseDriver.getDriver();
+		
+	}
 	
 	//Checkout button of image
 	
@@ -33,8 +78,23 @@ public class FancyBoxPage extends MasterPage{
 	// //*[@id="layer_cart"]/div[1]/div[2]/div[4]/a
 	
 	
-	// addCart = continue = driver.findElement(By.xpath("//*[@id='add_to_cart']/button"));
+	// addCart =
+	public void loadPageDirectAddToCart(){ 
+		WebElement produto = driver.findElement(By.xpath("//*[@id='center_column']/ul/li[1]/div/div[1]/div/a[1]/img"));
+														 //*[@id="center_column"]/ul/li/div/div[1]/div/a[1]/img
+		Actions builder = new Actions(driver);
+		builder.moveToElement(produto).perform();
+		proceed = driver.findElement(By.xpath("//*[@id='center_column']/ul/li[2]"));
+		
+	}
 	
+	public void loadBoxPage(){
+		checkout = driver.findElement(By.xpath("//*[@id='layer_cart']/div[1]/div[2]/div[4]/a"));
+
+		keepshop = driver.findElement(By.xpath("//*[@id='layer_cart']/div[1]/div[2]/div[4]/span"));
+		//keepshop = driver.findElement(By.xpath("//*[@id='layer_cart']/div[1]/div[2]/div[4]/span/span/i"));
+	}
+
 	// more button
 	//*[@id="add_to_cart"]/button
 }

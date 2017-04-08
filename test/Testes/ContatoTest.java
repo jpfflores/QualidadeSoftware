@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import pages.ContatoPage;
 import pages.LoginPage;
@@ -33,7 +34,7 @@ public class ContatoTest {
 	
 	public ContatoTest() {
 		baseDriver = Driver.getInstance();
-		//driver = baseDriver.GetDriver();
+		driver = baseDriver.getDriver();
 		contato = new ContatoPage(baseDriver);
 
 	}
@@ -42,7 +43,12 @@ public class ContatoTest {
 	public void testeEnvio(){
 		contato.navegarContato();
 		contato.carregarContatoPage();
-		
+		contato.getSubject().selectByIndex(1);
+		contato.digitaTexto(contato.getEmail(),"teste@teste.com");
+		contato.digitaTexto(contato.getOrder(),"h64773");
+		//contato.getOrder().selectByIndex(1);
+		contato.digitaTexto(contato.getMessage(),"Hereby a sign my copmplaint");
+		//contato.getSubmit().click();
 		Assert.assertTrue("Somente para compilar.", true);
 	}
 
@@ -50,8 +56,15 @@ public class ContatoTest {
 	public void testeEnvioCampoObrigatiorVazio(){
 		contato.navegarContato();
 		contato.carregarContatoPage();
+		contato.navegarContato();
+		contato.carregarContatoPage();
+		contato.getSubject().selectByIndex(1);
+		contato.digitaTexto(contato.getOrder(),"h64773");
+		//contato.getOrder().selectByIndex(1);
+		//contato.digitaTexto(contato.getMessage(),"Hereby a sign my copmplaint");
+		contato.getSubmit().click();
+		Assert.assertNotNull(contato.getAlert());
 		
-		Assert.assertTrue("Somente para compilar.", true);
 	}
 	
 	

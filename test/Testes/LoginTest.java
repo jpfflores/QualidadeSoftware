@@ -34,7 +34,7 @@ public class LoginTest extends MasterPage {
 
 	public LoginTest() {
 		baseDriver = Driver.getInstance();
-		driver = baseDriver.GetDriver();
+		driver = baseDriver.getDriver();
 		
 		login = new LoginPage(baseDriver);
 

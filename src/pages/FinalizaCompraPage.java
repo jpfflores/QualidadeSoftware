@@ -5,8 +5,8 @@ import org.openqa.selenium.By;
 public class FinalizaCompraPage extends MasterPage {
 
 	public FinalizaCompraPage(){
-	
-		
+	}
+	public void loadSummary(){	
 		// SUmmary
 		//checkout button //*[@id="center_column"]/p[2]/a[1]
 		// minus "cart_quantity_down_2_7_0_0"
@@ -16,13 +16,17 @@ public class FinalizaCompraPage extends MasterPage {
 		// SignIn
 		// LoginPage
 		
-		
+	}
+	
+	public void loadAddressTab(){
 		// Address
 		// updateDelivery = //*[@id="address_delivery"]/li[7]/a
 		// obs = "form-control"
 		
 		// proceed = //*[@id="center_column"]/form/p/button
-		
+	}
+	
+	public void loadShippingTab(){
 		// Shipping
 		//check By.id("cgv")
 		// proceed //*[@id="form"]/p/button
@@ -31,7 +35,9 @@ public class FinalizaCompraPage extends MasterPage {
 		// text (Read the Terms of Service)
 		
 		// class fancybox-error - do not agree
-		
+	}
+	
+	public void loadPaymentTab(){
 		// Payment
 		
 		//pay by bank wire  By.className("bankwire"));

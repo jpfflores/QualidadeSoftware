@@ -53,7 +53,7 @@ public class LoginPage extends MasterPage {
 
 	public LoginPage(Driver bdriver) {
 		baseDriver = bdriver;
-		driver = baseDriver.GetDriver();
+		driver = baseDriver.getDriver();
 	}
 
 	public void navegarLogin() throws Exception {

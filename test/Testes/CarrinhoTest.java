@@ -12,9 +12,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.junit.Assert;
 
 import pages.CartPage;
+import pages.FancyBoxPage;
 import system.Driver;
 import pages.SelecionaProdutoPage;
 
@@ -29,7 +32,7 @@ public class CarrinhoTest {
 
 	public CarrinhoTest() {
 		baseDriver = Driver.getInstance();
-		driver = baseDriver.GetDriver();
+		driver = baseDriver.getDriver();
 		// carrinho = new RemoveCarrinhoPage();
 
 	}
@@ -48,7 +51,7 @@ public class CarrinhoTest {
 		carrinho = new CartPage(baseDriver);
 		carrinho.montaCarrinho();
 		Assert.assertNotNull(carrinho.getEmpty());
-		//Assert.assertTrue("Somente para compilar.", true);
+		// Assert.assertTrue("Somente para compilar.", true);
 
 	}
 
@@ -57,15 +60,18 @@ public class CarrinhoTest {
 		// Compra dois itens
 		carrinho = new CartPage(baseDriver);
 		SelecionaProdutoPage compra = new SelecionaProdutoPage(baseDriver);
-		compra.digitaTexto(compra.getSearch(), "Printed");
-		compra.getSearchButton().click();
-		// Comprar Primeiro produto  
-		//*[@id="center_column"]/ul/li[1]/div/div[2]/div[2]/a[1]
-		
-		// Comprar segundo produto
-		//*[@id="center_column"]/ul/li[2]/div/div[2]/div[2]/a[1]
-		
-		//Remove um item
+
+		//Compra primeiro Item
+		carrinho.adicionaItemCarrinho("printed");
+		//Compra segundo item
+		carrinho.adicionaItemCarrinho("short");
+	
+		// Remove um item
+		carrinho.mostraCarrino();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement obj = carrinho.getRemoveItem();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		obj.click();
 		Assert.assertTrue("Somente para compilar.", true);
 	}
 
@@ -73,11 +79,11 @@ public class CarrinhoTest {
 	public void testeEsvaziaCarrinho() {
 		// Compra dois itens
 		carrinho = new CartPage(baseDriver);
-		
+
 		// Remove todos os itens
 		Assert.assertTrue("Somente para compilar.", true);
 	}
-	
+
 	@After
 	public void tearDown() throws Exception {
 		// driver.close();

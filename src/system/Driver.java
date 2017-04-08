@@ -54,11 +54,11 @@ public class Driver {
 		}
 		return instancia;
 	}
-	public WebDriver GetDriver(){
+	public WebDriver getDriver(){
 		return driver;
 	}
 	
-	public String GetBaseUrk(){
+	public String getBaseUrl(){
 		return baseUrl;
 	}
 	 

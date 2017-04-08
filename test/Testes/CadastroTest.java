@@ -32,7 +32,7 @@ public class CadastroTest {
 
   public CadastroTest(){
 	  baseDriver = Driver.getInstance();
-	  driver = baseDriver.GetDriver();
+	  driver = baseDriver.getDriver();
 	  
   }
   
@@ -88,7 +88,6 @@ public class CadastroTest {
 	//cadastro.getGender().click();
 	cadastro.getSubmit().click();
 	Assert.assertNotNull(cadastro.getSuccessAlert());
-	//Assert.assertTrue("Somente para compilar.", true);
     
   }
   

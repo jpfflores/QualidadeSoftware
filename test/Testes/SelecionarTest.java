@@ -30,7 +30,7 @@ public class SelecionarTest {
 
 	public SelecionarTest() {
 		baseDriver = Driver.getInstance();
-		driver = baseDriver.GetDriver();
+		driver = baseDriver.getDriver();
 		compra = new SelecionaProdutoPage(baseDriver);
 
 	}
@@ -51,6 +51,12 @@ public class SelecionarTest {
 		Assert.assertNotNull(compra.getSearchAlert());
 		
 	}
+	
+	@Test
+	public void selectByButtonAddToCart(){
+		//compra..getAddToCart()
+	}
+	
 /*
 	@Test
 	public void testSelecionarTShirt() throws Exception {

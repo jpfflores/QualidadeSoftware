@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ import system.Driver;
 public class SelecionaProdutoPage extends MasterPage{
 	private Driver baseDriver;
 	private WebDriver driver;
+	
 	private WebElement menuWomen;
 	private WebElement menuDresses;
 	private WebElement menuTshirts;
@@ -68,8 +70,6 @@ public class SelecionaProdutoPage extends MasterPage{
 			return null;
 		}
 		else {
-			
-		
 			if (searchAlert.getText().contains("0 results have been found."))
 				return searchAlert;
 			else
@@ -80,16 +80,14 @@ public class SelecionaProdutoPage extends MasterPage{
 	public WebElement getSearchFound(){
 		searchFound = driver.findElement(By.className("compare-form"));
 		return searchFound;
-		
 	}
 		
 	public SelecionaProdutoPage(Driver baseD){
 		baseDriver = baseD;
-		driver = baseDriver.GetDriver();
+		driver = baseDriver.getDriver();
 		// estes elementos sempre estarao na pagina
 		search = driver.findElement(By.id("search_query_top"));
 		searchButton = driver.findElement(By.xpath("//*[@id='searchbox']/button"));
-
 	}
 	
 	public void SelecionaSubMenuTShirtsWomen(){

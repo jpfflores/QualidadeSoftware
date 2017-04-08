@@ -129,7 +129,7 @@ public class CadastroPage extends MasterPage{
 	
 	public CadastroPage(Driver based){
 		baseDriver = based;
-		driver = baseDriver.GetDriver();
+		driver = baseDriver.getDriver();
 		login = new LoginPage(baseDriver);
 	}
 	
@@ -154,10 +154,10 @@ public class CadastroPage extends MasterPage{
 	    firstName = driver.findElement(By.id("customer_firstname"));
 	    lastName = driver.findElement(By.id("customer_lastname"));
 	    passwCadastro =  driver.findElement(By.id("passwd"));
-	    days = carregaSelect("days");
-	    months = carregaSelect("months");
-	    years = carregaSelect("years");
-	    country = carregaSelect("id_country");
+	    days = carregaSelect(driver, "days");
+	    months = carregaSelect(driver, "months");
+	    years = carregaSelect(driver, "years");
+	    country = carregaSelect(driver, "id_country");
 	    company = driver.findElement(By.id("company"));
 	    adress1 = driver.findElement(By.id("address1"));
 	    city = driver.findElement(By.id("city"));
@@ -174,9 +174,9 @@ public class CadastroPage extends MasterPage{
 	    firstName = driver.findElement(By.id("firstname"));
 	    lastName = driver.findElement(By.id("lastname"));
 	    email = driver.findElement(By.id("email"));
-	    days = carregaSelect("days");
-	    months = carregaSelect("months");
-	    years = carregaSelect("years");
+	    days = carregaSelect(driver, "days");
+	    months = carregaSelect(driver, "months");
+	    years = carregaSelect(driver, "years");
 	    oldPassword = driver.findElement(By.id("old_passwd"));
 	    passwAltera = driver.findElement(By.id("passwd"));
 	    confirmation = driver.findElement(By.id("confirmation"));
@@ -185,10 +185,5 @@ public class CadastroPage extends MasterPage{
 	}
 	
 	
-	public Select carregaSelect ( String label){
-		WebElement element = driver.findElement(By.id(label));
-		return new Select(element);
-		//s.selectByVisibleText("Opcao");
-	}
 	
 }
