@@ -29,6 +29,7 @@ public class CarrinhoTest {
 	private StringBuffer verificationErrors = new StringBuffer();
 
 	CartPage carrinho;
+	
 
 	public CarrinhoTest() {
 		baseDriver = Driver.getInstance();
@@ -59,29 +60,37 @@ public class CarrinhoTest {
 	public void testeRemoveUmItemCarrinho() {
 		// Compra dois itens
 		carrinho = new CartPage(baseDriver);
-		SelecionaProdutoPage compra = new SelecionaProdutoPage(baseDriver);
-
 		//Compra primeiro Item
 		carrinho.adicionaItemCarrinho("printed");
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		//Compra segundo item
 		carrinho.adicionaItemCarrinho("short");
-	
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
 		// Remove um item
-		carrinho.mostraCarrino();
+		carrinho.mostraCarrinho();
+		// conta quantos elementos estão no carrinho
+		int qty = carrinho.GetQuantityValue();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		WebElement obj = carrinho.getRemoveItem();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		obj.click();
-		Assert.assertTrue("Somente para compilar.", true);
+		
+		// Verifica 
+		Assert.assertEquals(1, qty -1 );
 	}
 
 	@Test
 	public void testeEsvaziaCarrinho() {
-		// Compra dois itens
+		//  um item ainda no carrinho
 		carrinho = new CartPage(baseDriver);
-
 		// Remove todos os itens
-		Assert.assertTrue("Somente para compilar.", true);
+		carrinho.mostraCarrinho();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement obj = carrinho.getRemoveItem();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		obj.click();
+		Assert.assertNotNull(carrinho.getEmpty());
 	}
 
 	@After

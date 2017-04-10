@@ -29,15 +29,21 @@ public class CartPage extends MasterPage{
 	}
 
 	public WebElement getEmpty() {
+		empty = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a/span[5]")); // Vazio
 		return empty;
 	}
 
 	public WebElement getQuantity() {
+		quantity = driver.findElement(By.className("ajax_cart_quantity"));
 		return quantity;
 	}
 
 	public WebElement getEmptyPage() {
-		return emptyPage;
+		emptyPage = driver.findElement(By.xpath("//*[@id='center_column']/p")); // Vazio
+		if (emptyPage.getText().compareToIgnoreCase("Your shopping cart is empty.") == 0)
+			return emptyPage;
+		else
+			return null;
 	}
 	
 	public WebElement getRemoveItem(){
@@ -47,6 +53,7 @@ public class CartPage extends MasterPage{
 	
 	public int GetQuantityValue(){
 		int value = 0;
+		getQuantity();
 		if(quantity != null){
 			value = Integer.parseUnsignedInt(quantity.getText());
 		}
@@ -77,7 +84,7 @@ public class CartPage extends MasterPage{
 		
 	}
 
-	public void mostraCarrino(){
+	public void mostraCarrinho(){
 		WebElement obj = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
 		Actions builder = new Actions(driver);
 		builder.moveToElement(obj).perform();

@@ -1,21 +1,40 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import system.Driver;
 
 public class FinalizaCompraPage extends MasterPage {
 
+	Driver baseDriver;
+	WebDriver driver;
+	
+	private WebElement minus;
+	private WebElement plus;
+	private WebElement quantidade;
+	private WebElement excluir;
+	private WebElement checkout;
+	
 	public FinalizaCompraPage(){
 	}
 	public void loadSummary(){	
 		// SUmmary
-		//checkout button //*[@id="center_column"]/p[2]/a[1]
-		// minus "cart_quantity_down_2_7_0_0"
-		// plus "cart_quantity_up_2_7_0_0"
-		// delete "cart_quantity_delete"
-		// continue shopping By.href("http://automationpractice.com/index.php?id_product=1&controller=product")
+		
+		checkout = driver.findElement(By.xpath("//*[@id='center_column']/p[2]/a[1]"));
+		minus = driver.findElement(By.className("cart_quantity_down_2_7_0_0"));
+		plus = driver.findElement(By.className("cart_quantity_up_2_7_0_0"));
+		excluir = driver.findElement(By.className("cart_quantity_delete"));
+		checkout = driver.findElement(By.xpath("//*[@id='center_column']/p[2]/a[1]/span"));
+
 		// SignIn
 		// LoginPage
 		
+	}
+
+	public void loadLogin(){	
+
 	}
 	
 	public void loadAddressTab(){
