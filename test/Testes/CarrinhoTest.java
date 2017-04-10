@@ -69,7 +69,7 @@ public class CarrinhoTest {
 		
 		// Remove um item
 		carrinho.mostraCarrinho();
-		// conta quantos elementos estão no carrinho
+		// conta quantos elementos estao no carrinho
 		int qty = carrinho.GetQuantityValue();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		WebElement obj = carrinho.getRemoveItem();
