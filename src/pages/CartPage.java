@@ -104,8 +104,9 @@ public class CartPage extends MasterPage{
 	}
 
 	public void excluiItem(){
-		((JavascriptExecutor)driver).executeScript("document.getElementsByClassName('ajax_cart_block_remove_link')[0].click();");
-
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", getRemoveItem());
+//		((JavascriptExecutor)driver).executeScript("document.getElementsByClassName('ajax_cart_block_remove_link')[0].click();");
 	}
 	
 	public void adicionaItemCarrinho(String produto) {
