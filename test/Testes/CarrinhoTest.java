@@ -13,6 +13,7 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import org.junit.Assert;
 
@@ -62,22 +63,25 @@ public class CarrinhoTest {
 		carrinho = new CartPage(baseDriver);
 		//Compra primeiro Item
 		carrinho.adicionaItemCarrinho("printed");
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
 		//Compra segundo item
 		carrinho.adicionaItemCarrinho("short");
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		
+
 		// Remove um item
-		carrinho.mostraCarrinho();
+		carrinho.excluiItem();
+		
 		// conta quantos elementos estao no carrinho
-		int qty = carrinho.GetQuantityValue();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		WebElement obj = carrinho.getRemoveItem();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		obj.click();
+		//carrinho.mostraCarrinho();
+		int tries = 0;
+		int qty = 0;
+		do { 
+			tries++;
+			qty = carrinho.GetQuantityValue();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		}while(qty >1 || tries < 5);
 		
 		// Verifica 
-		Assert.assertEquals(1, qty -1 );
+		Assert.assertEquals( 1, qty);
 	}
 
 	@Test
@@ -87,9 +91,8 @@ public class CarrinhoTest {
 		// Remove todos os itens
 		carrinho.mostraCarrinho();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		WebElement obj = carrinho.getRemoveItem();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		obj.click();
+		carrinho.excluiItem();
 		Assert.assertNotNull(carrinho.getEmpty());
 	}
 

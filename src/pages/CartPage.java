@@ -10,6 +10,7 @@ import system.Driver;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 
 public class CartPage extends MasterPage{
@@ -21,9 +22,9 @@ public class CartPage extends MasterPage{
 	private WebElement emptyPage;
 	private WebElement quantity;
 	private WebElement remove;
+	private WebElement checkout;
 	
 	public WebElement getCart() {
-		//cart = driver.findElement(By.className("shopping_cart"));
 		cart = driver.findElement(By.id("layer_cart"));
 		return cart;
 	}
@@ -34,7 +35,7 @@ public class CartPage extends MasterPage{
 	}
 
 	public WebElement getQuantity() {
-		quantity = driver.findElement(By.className("ajax_cart_quantity"));
+		quantity = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a/span[1]"));
 		return quantity;
 	}
 
@@ -54,13 +55,20 @@ public class CartPage extends MasterPage{
 	public int GetQuantityValue(){
 		int value = 0;
 		getQuantity();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		if(quantity != null){
 			value = Integer.parseUnsignedInt(quantity.getText());
 		}
-		
 		return value;
 		
 	}
+	
+	public WebElement getCheckout(){
+		checkout = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
+		return checkout;
+		
+	}
+	
 	public CartPage(Driver baseD) {
 		baseDriver = baseD;
 		driver = baseDriver.getDriver();
@@ -95,6 +103,11 @@ public class CartPage extends MasterPage{
 
 	}
 
+	public void excluiItem(){
+		((JavascriptExecutor)driver).executeScript("document.getElementsByClassName('ajax_cart_block_remove_link')[0].click();");
+
+	}
+	
 	public void adicionaItemCarrinho(String produto) {
 		// TODO Auto-generated method stub
 		SelecionaProdutoPage busca = new SelecionaProdutoPage(baseDriver);
@@ -102,12 +115,10 @@ public class CartPage extends MasterPage{
 		busca.getSearchButton().click();
 		// Comprar Primeiro produto
 		FancyBoxPage box = new FancyBoxPage(baseDriver);
-		box.loadPageDirectAddToCart();	// *[@id="center_column"]/ul/li[1]/div/div[2]/div[2]/a[1]
+		box.loadPageDirectAddToCart();
 		box.getAddToCart().click();
-		//box.getProceed().click();
 		box.loadBoxPage();
 		
-		//box.getKeepshop().click();
 		baseDriver.navegarPaginaBase();
 	}
 
