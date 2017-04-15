@@ -9,17 +9,16 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.junit.Assert;
 
 import pages.LoginPage;
-import pages.MasterPage;
 import system.Driver;
+import org.junit.runners.MethodSorters;
+import org.junit.FixMethodOrder;
 
-public class LoginTest extends MasterPage {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class LoginTest {
 	private Driver baseDriver;
-	private WebDriver driver;
-	private String baseUrl;
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
 	private LoginPage login;
@@ -34,7 +33,7 @@ public class LoginTest extends MasterPage {
 
 	public LoginTest() {
 		baseDriver = Driver.getInstance();
-		driver = baseDriver.getDriver();
+		baseDriver.getDriver();
 		
 		login = new LoginPage(baseDriver);
 

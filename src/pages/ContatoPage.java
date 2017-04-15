@@ -1,10 +1,11 @@
 package pages;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import system.Driver;
 
@@ -15,7 +16,6 @@ public class ContatoPage extends MasterPage {
 	WebElement contact;
 	private Select subject;
 	private WebElement email;
-	private WebElement order;
 	private WebElement chooseFile;
 	private WebElement message;
 	private WebElement submit;
@@ -26,10 +26,6 @@ public class ContatoPage extends MasterPage {
 
 	public WebElement getEmail() {
 		return email;
-	}
-
-	public WebElement getOrder() {
-		return order;
 	}
 
 	public WebElement getChooseFile() {
@@ -53,16 +49,16 @@ public class ContatoPage extends MasterPage {
 		}
 	}
 
-	public ContatoPage(Driver driverB) {
-		baseDriver = driverB;
+	public ContatoPage(Driver baseD) {
+		baseDriver = baseD;
 		driver = baseDriver.getDriver();
+		wait = new WebDriverWait(driver, 15);
+		builder = new Actions(driver);
 	}
 
 	public void carregarContatoPage() {
 		subject = carregaSelect(driver, "id_contact");
 		email = driver.findElement(By.id("email"));
-		//order = carregaSelect(driver, "id_order");
-		order = driver.findElement(By.id("id_order"));
 		message = driver.findElement(By.id("message"));
 		submit = driver.findElement(By.id("submitMessage"));
 	}

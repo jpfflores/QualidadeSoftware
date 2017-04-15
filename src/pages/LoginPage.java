@@ -4,8 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import junit.framework.Assert;
 import system.Driver;
 
 public class LoginPage extends MasterPage {
@@ -51,9 +52,11 @@ public class LoginPage extends MasterPage {
 	
 
 
-	public LoginPage(Driver bdriver) {
-		baseDriver = bdriver;
+	public LoginPage(Driver baseD) {
+		baseDriver = baseD;
 		driver = baseDriver.getDriver();
+		wait = new WebDriverWait(driver, 15);
+		builder = new Actions(driver);
 	}
 
 	public void navegarLogin() throws Exception {

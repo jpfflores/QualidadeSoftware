@@ -1,21 +1,13 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.JavascriptExecutor;
-
 import system.Driver;
 
 public class FinalizaCompraPage extends MasterPage {
-
-	Driver baseDriver;
-	WebDriver driver;
-	WebDriverWait wait;
-	Actions builder;
 	
 	// Summary 
 	private WebElement minus;
@@ -232,7 +224,7 @@ public class FinalizaCompraPage extends MasterPage {
 		return submitshipping;
 	}
 	public WebElement getLoginALert() {
-		WebElement obj = driver.findElement(By.linkText("There is 1 error"));
+		WebElement obj = driver.findElement(By.xpath("//*[@id='center_column']/div[1]/p"));
 		return obj;
 	}
 	

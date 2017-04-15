@@ -21,7 +21,10 @@ import pages.CarrinhoPage;
 import pages.FancyBoxPage;
 import system.Driver;
 import pages.SelecionaProdutoPage;
+import org.junit.runners.MethodSorters;
+import org.junit.FixMethodOrder;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CarrinhoTest {
 	private Driver baseDriver;
 	private WebDriver driver;
@@ -48,7 +51,7 @@ public class CarrinhoTest {
 	}
 
 	@Test
-	public void testeEsvaziaCarrinhoSemItens() {
+	public void testeAEsvaziaCarrinhoSemItens() {
 		// carrinho.navegaPaginaInicial();
 		carrinho = new CarrinhoPage(baseDriver);
 		carrinho.montaCarrinho();
@@ -57,7 +60,7 @@ public class CarrinhoTest {
 	}
 
 	@Test
-	public void testeRemoveUmItemCarrinho() {
+	public void testeBRemoveUmItemCarrinho() {
 		// Compra dois itens
 		carrinho = new CarrinhoPage(baseDriver);
 		//Compra primeiro Item
@@ -66,30 +69,25 @@ public class CarrinhoTest {
 		//Compra segundo item
 		carrinho.adicionaItemCarrinho("short");
 
+		// conta quantos elementos estao no carrinho
+		int qty = 0;
+		qty = carrinho.GetQuantityValue();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
 		// Remove um item
 		carrinho.excluiItem();
-		
-		// conta quantos elementos estao no carrinho
-		//carrinho.mostraCarrinho();
-		int tries = 0;
-		int qty = 0;
-		do { 
-			tries++;
-			qty = carrinho.GetQuantityValue();
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		}while(qty >1 || tries < 5);
 	
 		// Verifica 
-		Assert.assertEquals( 1, qty);
+		Assert.assertEquals( 1, (qty-1) );
 	}
 
 	@Test
-	public void testeEsvaziaCarrinho() {
+	public void testeCEsvaziaCarrinho() {
 		//  um item ainda no carrinho
 		carrinho = new CarrinhoPage(baseDriver);
 		// Remove todos os itens
 		carrinho.mostraCarrinho();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		carrinho.excluiItem();
 		Assert.assertNotNull(carrinho.getEmpty());
 	}

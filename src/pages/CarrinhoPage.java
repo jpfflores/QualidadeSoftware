@@ -3,8 +3,6 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import system.Driver;
@@ -12,20 +10,83 @@ import system.Driver;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 
 public class CarrinhoPage extends MasterPage{
 	private Driver baseDriver;
 	private WebDriver driver;
-
+	WebDriverWait wait;
+	Actions builder;
+	
 	private WebElement cart;
 	private WebElement empty;
 	private WebElement emptyPage;
 	private WebElement quantity;
 	private WebElement remove;
 	private WebElement checkout;
+
+	public CarrinhoPage(Driver baseD) {
+		baseDriver = baseD;
+		driver = baseDriver.getDriver();
+		wait = new WebDriverWait(driver, 15);
+		builder = new Actions(driver);
+
+	}
 	
+	public int GetQuantityValue(){
+		int value = 0;
+		getQuantity();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		if(quantity != null){
+			value = Integer.parseUnsignedInt(quantity.getText());
+		}
+		return value;
+		
+	}
+	
+	public void montaCarrinho() {
+		mostraMenuEscondido(getCart(),driver);
+		quantity = driver.findElement(By.className("ajax_cart_quantity"));
+		empty = driver.findElement(By.className("ajax_cart_no_product")); // Vazio
+
+	}
+
+	public void carregaSumarioCarrinho() {
+		cart.click();
+		try{
+		emptyPage = driver.findElement(By.className("alert alert-warning"));
+		} catch (NoSuchElementException exc) {
+			return;
+		}
+		
+	}
+
+	public void mostraCarrinho(){
+		WebElement obj = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
+		Actions builder = new Actions(driver);
+		builder.moveToElement(obj).perform();
+	}
+	
+	public void excluiItem(){
+		mostraCarrinho();
+		builder.moveToElement(getRemoveItem()).click().build().perform();
+	}
+	
+	public void adicionaItemCarrinho(String produto) {
+		SelecionaProdutoPage busca = new SelecionaProdutoPage(baseDriver);
+		digitaTexto(busca.getSearch(), produto);
+		busca.getSearchButton().click();
+		
+		// Comprar Primeiro produto
+		FancyBoxPage box = new FancyBoxPage(baseDriver);
+		box.loadPageDirectAddToCart();
+		box.getAddToCart().click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		box.loadBoxPage();
+		
+		baseDriver.navegarPaginaBase();
+	}
+
 	public WebElement getCart() {
 		cart = driver.findElement(By.id("layer_cart"));
 		return cart;
@@ -50,86 +111,13 @@ public class CarrinhoPage extends MasterPage{
 	}
 	
 	public WebElement getRemoveItem(){
-		//remove = driver.findElement(By.className("ajax_cart_block_remove_link"));
-		//remove = driver.findElement(By.className("remove_link"));
-//		remove = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/div/div/div/dl/dt/span/a"));
 		remove = driver.findElement(By.xpath("//*[@class='remove_link']/a"));
 		return remove;
 	}
-	
-	public int GetQuantityValue(){
-		int value = 0;
-		getQuantity();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		if(quantity != null){
-			value = Integer.parseUnsignedInt(quantity.getText());
-		}
-		return value;
-		
-	}
-	
+
 	public WebElement getCheckout(){
 		checkout = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
 		return checkout;
-		
 	}
 	
-	public CarrinhoPage(Driver baseD) {
-		baseDriver = baseD;
-		driver = baseDriver.getDriver();
-
-	}
-
-	public void montaCarrinho() {
-		mostraMenuEscondido(getCart(),driver);
-		quantity = driver.findElement(By.className("ajax_cart_quantity"));
-		empty = driver.findElement(By.className("ajax_cart_no_product")); // Vazio
-
-	}
-
-	public void carregaSumarioCarrinho() {
-		cart.click();
-		try{
-		emptyPage = driver.findElement(By.className("alert alert-warning"));
-		} catch (NoSuchElementException exc) {
-			
-		}
-		
-	}
-
-	public void mostraCarrinho(){
-		WebElement obj = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
-		Actions builder = new Actions(driver);
-		builder.moveToElement(obj).perform();
-	}
-	
-	public void navegaPaginaInicial() {
-		baseDriver.navegarPaginaBase();
-
-	}
-
-	public void excluiItem(){
-		mostraCarrinho();
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		By remove = By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/div/div/div/dl/dt/span/a");
-		//*[@id="header"]/div[3]/div/div/div[3]/div/div/div/div/dl/dt[1]/span
-//		wait.until(ExpectedConditions.elementToBeClickable(remove));
-		Actions builder = new Actions(driver);
-		WebElement obj = getRemoveItem();
-		builder.moveToElement(getRemoveItem()).click().build().perform();
-	}
-	
-	public void adicionaItemCarrinho(String produto) {
-		SelecionaProdutoPage busca = new SelecionaProdutoPage(baseDriver);
-		digitaTexto(busca.getSearch(), produto);
-		busca.getSearchButton().click();
-		// Comprar Primeiro produto
-		FancyBoxPage box = new FancyBoxPage(baseDriver);
-		box.loadPageDirectAddToCart();
-		box.getAddToCart().click();
-		box.loadBoxPage();
-		
-		baseDriver.navegarPaginaBase();
-	}
-
 }

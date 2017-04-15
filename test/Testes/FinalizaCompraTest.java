@@ -10,7 +10,10 @@ import pages.CarrinhoPage;
 import pages.FinalizaCompraPage;
 import pages.LoginPage;
 import system.Driver;
+import org.junit.runners.MethodSorters;
+import org.junit.FixMethodOrder;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FinalizaCompraTest {
 	
 	private Driver baseDriver;
@@ -24,15 +27,20 @@ public class FinalizaCompraTest {
 		driver = baseDriver.getDriver();
  
 	}
-	
-	@Test
-	public void TesteCompraComUsuarioInvalido(){
+
+	public void garanteLogout(){
 		LoginPage login = new LoginPage(baseDriver);
 		try {
 			login.executaLogout();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void TesteACompraComUsuarioInvalido(){
+		garanteLogout();
+		baseDriver.navegarPaginaBase();
 		compra = new FinalizaCompraPage(baseDriver);
 		CarrinhoPage carrinho = new CarrinhoPage(baseDriver);
 		//Compra primeiro Item
@@ -41,12 +49,14 @@ public class FinalizaCompraTest {
 		carrinho.mostraCarrinho();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		
-		WebElement obj = carrinho.getCheckout();
-/*		while(obj == null || tentativas >5){
+		WebElement obj = null;
+		int tentativas = 0;
+		
+		while(obj == null && tentativas < 5){
 			tentativas ++;
 			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 			obj = carrinho.getCheckout();
-		}*/
+		}
 		obj.click();
 		
 		compra.loadSummary();
@@ -64,8 +74,9 @@ public class FinalizaCompraTest {
 	}
 	
 	@Test
-	public void TesteCompraComSucessoTransferencia(){
-		
+	public void TesteBCompraComSucessoTransferencia(){
+		garanteLogout();
+		baseDriver.navegarPaginaBase();
 		compra = new FinalizaCompraPage(baseDriver);
 		CarrinhoPage carrinho = new CarrinhoPage(baseDriver);
 
@@ -107,11 +118,12 @@ public class FinalizaCompraTest {
 	}
 
 	@Test
-	public void TesteCompraComSucessoCheque(){
-		
+	public void TesteCCompraComSucessoCheque(){
+		garanteLogout();
+		baseDriver.navegarPaginaBase();
 		compra = new FinalizaCompraPage(baseDriver);
 		CarrinhoPage carrinho = new CarrinhoPage(baseDriver);
-
+		baseDriver.navegarPaginaBase();
 		//Compra Item
 		carrinho.adicionaItemCarrinho("printed");
 		carrinho.mostraCarrinho();

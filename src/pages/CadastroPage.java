@@ -4,12 +4,11 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import system.Driver;
-
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 public class CadastroPage extends MasterPage{
 	private Driver baseDriver;
@@ -30,7 +29,6 @@ public class CadastroPage extends MasterPage{
 	private WebElement company;
 	private WebElement adress1;
 	private WebElement city;
-	private WebElement postCode;
 	private WebElement phone;
 	private WebElement alias;
 	private WebElement submit;
@@ -86,6 +84,7 @@ public class CadastroPage extends MasterPage{
 	}
 
 	public WebElement getPhone(){
+		phone = driver.findElement(By.id("phone"));
 		return phone;
 	}
 
@@ -122,14 +121,28 @@ public class CadastroPage extends MasterPage{
 		return element;
 				//By.className("alert-success"));
 	}
-		
+
+	public WebElement getErro(){
+		WebElement elemento;
+		elemento = driver.findElement(By.xpath("//*[@id='center_column']/div/div"));
+		return elemento;
+	}
+	
+	public WebElement getErroObrigatorio(){
+		WebElement elemento;
+		elemento = driver.findElement(By.xpath("//*[@id='center_column']/div/p[2]"));
+		return elemento;
+	}
+	
 	public LoginPage getLogin(){
 		return login;
 	}
 	
-	public CadastroPage(Driver based){
-		baseDriver = based;
+	public CadastroPage(Driver baseD){
+		baseDriver = baseD;
 		driver = baseDriver.getDriver();
+		wait = new WebDriverWait(driver, 15);
+		builder = new Actions(driver);
 		login = new LoginPage(baseDriver);
 	}
 	
@@ -161,14 +174,13 @@ public class CadastroPage extends MasterPage{
 	    company = driver.findElement(By.id("company"));
 	    adress1 = driver.findElement(By.id("address1"));
 	    city = driver.findElement(By.id("city"));
-	    postCode = driver.findElement(By.id("postcode"));
+	    driver.findElement(By.id("postcode"));
 	    phone = driver.findElement(By.id("phone"));
 	    alias = driver.findElement(By.id("alias"));
 	    submit = driver.findElement(By.id("submitAccount"));
 	}
 	
 	public void carregaCadastroAlterar(){
-		//*[@id="center_column"]/div/div[1]/ul/li[4]/a
 	    driver.findElement(By.cssSelector("a[title=\"Information\"] > span")).click();
 	    gender = driver.findElement(By.id("id_gender1"));
 	    firstName = driver.findElement(By.id("firstname"));

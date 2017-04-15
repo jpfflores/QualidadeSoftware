@@ -1,19 +1,19 @@
 package pages;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import system.Driver;
 
 
 public class SelecionaProdutoPage extends MasterPage{
-	private Driver baseDriver;
-	private WebDriver driver;
 	
 	private WebElement menuWomen;
 	private WebElement menuDresses;
@@ -55,11 +55,13 @@ public class SelecionaProdutoPage extends MasterPage{
 	private WebElement searchFound;
 	
 	public WebElement getSearch(){
+		search = driver.findElement(By.id("search_query_top"));
 		return search;
 		
 	}
 	
 	public WebElement getSearchButton(){
+		searchButton = driver.findElement(By.xpath("//*[@id='searchbox']/button"));
 		return searchButton;
 		
 	}
@@ -85,6 +87,9 @@ public class SelecionaProdutoPage extends MasterPage{
 	public SelecionaProdutoPage(Driver baseD){
 		baseDriver = baseD;
 		driver = baseDriver.getDriver();
+		wait = new WebDriverWait(driver, 15);
+		builder = new Actions(driver);
+		
 		// estes elementos sempre estarao na pagina
 		search = driver.findElement(By.id("search_query_top"));
 		searchButton = driver.findElement(By.xpath("//*[@id='searchbox']/button"));
@@ -92,30 +97,42 @@ public class SelecionaProdutoPage extends MasterPage{
 	
 	public void SelecionaSubMenuTShirtsWomen(){
 		menuWomen = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/a"));
-		Actions builder = new Actions(driver);
 		builder.moveToElement(menuWomen).perform();
-		this.menuTshirts = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[1]/a"));
-		menuTshirts.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//*[@id="block_top_menu"]/ul/li[1]/a
+		this.subMenuTshirts = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[1]/a"));
+		
+		//this.subMenuTshirts = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[1]/a")));
+		builder.moveToElement(subMenuTshirts).perform();
+		subMenuTshirts.click();
 	}
 
 	public void SelecionaSubMenuBlousesWomen(){
 		menuWomen = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/a"));
-		Actions builder = new Actions(driver);
 		builder.moveToElement(menuWomen).perform();
-		this.menuTshirts = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a"));
+		//WebElement elemento = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a")));
+		this.menuTshirts = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a")));
+		//this.menuTshirts = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a"));
 		menuTshirts.click();
 	}
 	
 	public void CarregaDresses(){
-		
+		WebElement elemento =  driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[2]/a"));
+		elemento.click();
 	}
 
 	public void CarregaTshirt(){
-		
+		WebElement elemento =  driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[3]/a"));
+		elemento.click();
 	}
 	
 	public void CarregaBlouses(){
 		
+	}
+	
+	public WebElement carregaPrimeiroItem(){
+		WebElement elemento = driver.findElement(By.xpath("//*[@id='homefeatured']/li[1]/div/div[2]/div[2]/a[1]/span"));
+		return elemento;
 	}
 
 	

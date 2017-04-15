@@ -7,47 +7,50 @@ import org.openqa.selenium.*;
 import pages.CadastroPage;
 import pages.LoginPage;
 import system.Driver;
+import org.junit.runners.MethodSorters;
+import org.junit.FixMethodOrder;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CadastroTest {
-  Driver baseDriver;
-  private WebDriver driver;
-  private String baseUrl;
-  private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
-  
-/* This class uses LoginPage as starting point
- * 
- * 
- */
-  @Before
-  public void setUp() throws Exception {
+	Driver baseDriver;
+	private WebDriver driver;
+	private boolean acceptNextAlert = true;
+	private StringBuffer verificationErrors = new StringBuffer();
 
-  }
+	/*
+	 * This class uses LoginPage as starting point
+	 * 
+	 * 
+	 */
+	@Before
+	public void setUp() throws Exception {
 
-  public CadastroTest(){
-	  baseDriver = Driver.getInstance();
-	  driver = baseDriver.getDriver();
-	  
-  }
-  
-  @Test
-  public void testCadastroJaExistente() throws Exception {
-	  CadastroPage cadastro = new CadastroPage(baseDriver);
-	  LoginPage login = cadastro.getLogin();
-	  login.navegarLogin();
-	  login.carregaObjetosPaginaLogin();
-	  login.digitaTexto(login.getEmail(), "teste@teste.com");
-	  login.getSubmit().click();
-	  Assert.assertNotNull(login.getAlert());
-	
-  }
-  
-  @Test
-  public void testCadastrarCliente() throws Exception {
+	}
+
+	public CadastroTest() {
+		baseDriver = Driver.getInstance();
+		driver = baseDriver.getDriver();
+
+	}
+
+	@Test
+	public void testACadastroJaExistente() throws Exception {
+		CadastroPage cadastro = new CadastroPage(baseDriver);
+		LoginPage login = cadastro.getLogin();
+		login.navegarLogin();
+		login.carregaObjetosPaginaLogin();
+		login.digitaTexto(login.getEmail(), "teste@teste.com");
+		login.getSubmit().click();
+		Assert.assertNotNull(login.getAlert());
+
+	}
+
+	@Test
+	public void testBCadastrarCliente() throws Exception {
 		CadastroPage cadastro = new CadastroPage(baseDriver);
 		cadastro.navigateCadastrarUsuario();
 		cadastro.carregaCadastro();
-		
+
 		cadastro.digitaTexto(cadastro.getFirstName(), "Jason");
 		cadastro.digitaTexto(cadastro.getLastName(), "Bourne");
 		cadastro.getGender().click();
@@ -61,85 +64,108 @@ public class CadastroTest {
 		cadastro.digitaTexto(cadastro.getAlias(), "Testing");
 		baseDriver.navegarPaginaBase();
 		Assert.assertTrue("Somente para compilar.", true);
-  }
-  
-  @Test
-  public void testAlterarCadastroSucesso() throws Exception {
-	CadastroPage cadastro = new CadastroPage(baseDriver);
-	LoginPage login = new LoginPage(baseDriver);
-	login.navegarLogin();
-	login.carregaObjetosPaginaLogin();
-	login.digitaTexto(login.getUser(), "teste@teste.com");
-	login.digitaTexto(login.getPassword(), "teste");
-	login.getSubmit().click();
-	cadastro.carregaCadastroAlterar();
-	
-	// base para inserir os dados
-	cadastro.digitaTexto(cadastro.getFirstName(), "Jason");
-	cadastro.digitaTexto(cadastro.getLastName(), "Bourne");
-	cadastro.digitaTexto(cadastro.getOldPassword(), "teste");
-	cadastro.digitaTexto(cadastro.getEmail(), "teste@teste.com");
-	//cadastro.getGender().click();
-	cadastro.getSubmit().click();
-	Assert.assertNotNull(cadastro.getSuccessAlert());
-    
-  }
-  
-  @Test
-  public void testAlterarCadastroFaltaCampoObrigatorio() throws Exception {
+	}
 
-  }
+	@Test
+	public void testCAlterarCadastroSucesso() throws Exception {
+		CadastroPage cadastro = new CadastroPage(baseDriver);
+		LoginPage login = new LoginPage(baseDriver);
+		login.navegarLogin();
+		login.carregaObjetosPaginaLogin();
+		login.digitaTexto(login.getUser(), "teste@teste.com");
+		login.digitaTexto(login.getPassword(), "teste");
+		login.getSubmit().click();
+		cadastro.carregaCadastroAlterar();
 
-  @Test
-  public void testAlterarCadastroTelefoneInvalido() throws Exception {
+		// base para inserir os dados
+		cadastro.digitaTexto(cadastro.getFirstName(), "Jason");
+		cadastro.digitaTexto(cadastro.getLastName(), "Bourne");
+		cadastro.digitaTexto(cadastro.getOldPassword(), "teste");
+		cadastro.digitaTexto(cadastro.getEmail(), "teste@teste.com");
+		// cadastro.getGender().click();
+		cadastro.getSubmit().click();
+		Assert.assertNotNull(cadastro.getSuccessAlert());
+	}
 
-  }
+	@Test
+	public void testDAlterarCadastroFaltaCampoObrigatorio() throws Exception {
+		CadastroPage cadastro = new CadastroPage(baseDriver);
+		LoginPage login = new LoginPage(baseDriver);
+		login.navegarLogin();
+		login.carregaObjetosPaginaLogin();
+		login.digitaTexto(login.getUser(), "teste@teste.com");
+		login.digitaTexto(login.getPassword(), "teste");
+		login.getSubmit().click();
+		cadastro.carregaCadastroAlterar();
 
-  @Test
-  public void testAlterarCadastroConfirmacaoSenhaErrada() throws Exception {
+		// base para inserir os dados
+		cadastro.digitaTexto(cadastro.getFirstName(), "Jason");
+		cadastro.digitaTexto(cadastro.getLastName(), "Bourne");
+		cadastro.getSubmit().click();
+		Assert.assertNotNull(cadastro.getErro());
+	}
 
-  }
-  
-  @After
-  public void tearDown() throws Exception {
-	//driver.close();
-    //driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
-  }
+	@Test
+	public void testEAlterarCadastroConfirmacaoSenhaErrada() throws Exception {
+		CadastroPage cadastro = new CadastroPage(baseDriver);
+		LoginPage login = new LoginPage(baseDriver);
+		login.navegarLogin();
+		login.carregaObjetosPaginaLogin();
+		login.digitaTexto(login.getUser(), "teste@teste.com");
+		login.digitaTexto(login.getPassword(), "teste");
+		login.getSubmit().click();
+		cadastro.carregaCadastroAlterar();
 
-  private boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
+		// base para inserir os dados
+		cadastro.digitaTexto(cadastro.getFirstName(), "Jason");
+		cadastro.digitaTexto(cadastro.getLastName(), "Bourne");
+		cadastro.digitaTexto(cadastro.getOldPassword(), "errado");
+		cadastro.digitaTexto(cadastro.getEmail(), "teste@teste.com");
+		// cadastro.getGender().click();
+		cadastro.getSubmit().click();
+		Assert.assertNotNull(cadastro.getErro());
+	}
 
-  private boolean isAlertPresent() {
-    try {
-      driver.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
+	@After
+	public void tearDown() throws Exception {
+		// driver.close();
+		// driver.quit();
+		String verificationErrorString = verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
+	}
 
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
-  }
+	private boolean isElementPresent(By by) {
+		try {
+			driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
+	private boolean isAlertPresent() {
+		try {
+			driver.switchTo().alert();
+			return true;
+		} catch (NoAlertPresentException e) {
+			return false;
+		}
+	}
+
+	private String closeAlertAndGetItsText() {
+		try {
+			Alert alert = driver.switchTo().alert();
+			String alertText = alert.getText();
+			if (acceptNextAlert) {
+				alert.accept();
+			} else {
+				alert.dismiss();
+			}
+			return alertText;
+		} finally {
+			acceptNextAlert = true;
+		}
+	}
 }

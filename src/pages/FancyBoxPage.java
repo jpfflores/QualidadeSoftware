@@ -1,10 +1,10 @@
 package pages;
 
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import system.Driver;
 
@@ -50,6 +50,8 @@ public class FancyBoxPage extends MasterPage{
 	public FancyBoxPage(Driver baseD){
 		baseDriver = baseD;
 		driver = baseDriver.getDriver();
+		wait = new WebDriverWait(driver, 15);
+		builder = new Actions(driver);
 		
 	}
 	
@@ -81,7 +83,6 @@ public class FancyBoxPage extends MasterPage{
 	// addCart =
 	public void loadPageDirectAddToCart(){ 
 		WebElement produto = driver.findElement(By.xpath("//*[@id='center_column']/ul/li[1]/div/div[1]/div/a[1]/img"));
-														 //*[@id="center_column"]/ul/li/div/div[1]/div/a[1]/img
 		Actions builder = new Actions(driver);
 		builder.moveToElement(produto).perform();
 		proceed = driver.findElement(By.xpath("//*[@id='center_column']/ul/li[2]"));
