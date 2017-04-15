@@ -91,7 +91,7 @@ public class FinalizaCompraTest {
 		compra.loadAddressTab();
 		WebElement comentario = compra.getComentario();
 //		compra.getBuilder().moveToElement(comentario).click().build().perform();
-		compra.digitaTexto(comentario, "Perto da praça.");
+		compra.digitaTexto(comentario, "Perto da parque.");
 		compra.getSubmitEndereco().click();
 		
 		compra.loadShippingTab();
@@ -134,7 +134,7 @@ public class FinalizaCompraTest {
 		compra.loadAddressTab();
 		WebElement comentario = compra.getComentario();
 		compra.getBuilder().moveToElement(comentario).click().build().perform();
-		compra.digitaTexto(comentario, "Perto da praça.");
+		compra.digitaTexto(comentario, "Perto da parque.");
 		compra.getSubmitEndereco().click();
 		
 		compra.loadShippingTab();
