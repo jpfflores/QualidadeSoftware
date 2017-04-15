@@ -17,7 +17,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import org.junit.Assert;
 
-import pages.CartPage;
+import pages.CarrinhoPage;
 import pages.FancyBoxPage;
 import system.Driver;
 import pages.SelecionaProdutoPage;
@@ -29,7 +29,7 @@ public class CarrinhoTest {
 	private boolean acceptNextAlert = true;
 	private StringBuffer verificationErrors = new StringBuffer();
 
-	CartPage carrinho;
+	CarrinhoPage carrinho;
 	
 
 	public CarrinhoTest() {
@@ -50,17 +50,16 @@ public class CarrinhoTest {
 	@Test
 	public void testeEsvaziaCarrinhoSemItens() {
 		// carrinho.navegaPaginaInicial();
-		carrinho = new CartPage(baseDriver);
+		carrinho = new CarrinhoPage(baseDriver);
 		carrinho.montaCarrinho();
 		Assert.assertNotNull(carrinho.getEmpty());
-		// Assert.assertTrue("Somente para compilar.", true);
 
 	}
 
 	@Test
 	public void testeRemoveUmItemCarrinho() {
 		// Compra dois itens
-		carrinho = new CartPage(baseDriver);
+		carrinho = new CarrinhoPage(baseDriver);
 		//Compra primeiro Item
 		carrinho.adicionaItemCarrinho("printed");
 		
@@ -79,7 +78,7 @@ public class CarrinhoTest {
 			qty = carrinho.GetQuantityValue();
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		}while(qty >1 || tries < 5);
-		
+	
 		// Verifica 
 		Assert.assertEquals( 1, qty);
 	}
@@ -87,10 +86,9 @@ public class CarrinhoTest {
 	@Test
 	public void testeEsvaziaCarrinho() {
 		//  um item ainda no carrinho
-		carrinho = new CartPage(baseDriver);
+		carrinho = new CarrinhoPage(baseDriver);
 		// Remove todos os itens
 		carrinho.mostraCarrinho();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		carrinho.excluiItem();
 		Assert.assertNotNull(carrinho.getEmpty());

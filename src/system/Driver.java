@@ -2,6 +2,7 @@ package system;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.*;
 //import org.openqa.selenium.firefox.FirefoxDriver;
@@ -20,30 +21,34 @@ public class Driver {
 
 		if(OS.indexOf("win") >= 0){
 			// Using phantomjs
-			//DesiredCapabilities caps = new DesiredCapabilities();
-			//caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");                  
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");                  
 			//driver = new PhantomJSDriver(caps);
+			//driver.manage().window().setSize(new Dimension(1920, 1080));
 			
 			System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
 			driver = new ChromeDriver();
 		} else {
 			
-			/*System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
+			/*
+			System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 			DesiredCapabilities capabilities=DesiredCapabilities.firefox();
 			capabilities.setCapability("marionette", true);
-			driver = new FirefoxDriver(capabilities);*/
+			driver = new FirefoxDriver(capabilities);
+			*/
 			/* 
 			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 			driver = new ChromeDriver();
 			*/
+			
 			DesiredCapabilities caps = new DesiredCapabilities();
 			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "/usr/local/bin/phantomjs");                  
 			driver = new PhantomJSDriver(caps);
-			
+
 			
 		}
 		
-	    baseUrl = "http://automationpractice.com/index.php";
+	    baseUrl = "http://automationpractice.com";
 	    driver.get(baseUrl);
 	    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}

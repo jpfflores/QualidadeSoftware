@@ -3,7 +3,9 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import system.Driver;
 
@@ -13,7 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 
-public class CartPage extends MasterPage{
+public class CarrinhoPage extends MasterPage{
 	private Driver baseDriver;
 	private WebDriver driver;
 
@@ -48,7 +50,10 @@ public class CartPage extends MasterPage{
 	}
 	
 	public WebElement getRemoveItem(){
-		remove = driver.findElement(By.className("ajax_cart_block_remove_link"));
+		//remove = driver.findElement(By.className("ajax_cart_block_remove_link"));
+		//remove = driver.findElement(By.className("remove_link"));
+//		remove = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/div/div/div/dl/dt/span/a"));
+		remove = driver.findElement(By.xpath("//*[@class='remove_link']/a"));
 		return remove;
 	}
 	
@@ -69,7 +74,7 @@ public class CartPage extends MasterPage{
 		
 	}
 	
-	public CartPage(Driver baseD) {
+	public CarrinhoPage(Driver baseD) {
 		baseDriver = baseD;
 		driver = baseDriver.getDriver();
 
@@ -104,13 +109,17 @@ public class CartPage extends MasterPage{
 	}
 
 	public void excluiItem(){
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", getRemoveItem());
-//		((JavascriptExecutor)driver).executeScript("document.getElementsByClassName('ajax_cart_block_remove_link')[0].click();");
+		mostraCarrinho();
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		By remove = By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/div/div/div/dl/dt/span/a");
+		//*[@id="header"]/div[3]/div/div/div[3]/div/div/div/div/dl/dt[1]/span
+//		wait.until(ExpectedConditions.elementToBeClickable(remove));
+		Actions builder = new Actions(driver);
+		WebElement obj = getRemoveItem();
+		builder.moveToElement(getRemoveItem()).click().build().perform();
 	}
 	
 	public void adicionaItemCarrinho(String produto) {
-		// TODO Auto-generated method stub
 		SelecionaProdutoPage busca = new SelecionaProdutoPage(baseDriver);
 		digitaTexto(busca.getSearch(), produto);
 		busca.getSearchButton().click();

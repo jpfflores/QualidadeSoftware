@@ -3,6 +3,9 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 
 import system.Driver;
@@ -11,6 +14,8 @@ public class FinalizaCompraPage extends MasterPage {
 
 	Driver baseDriver;
 	WebDriver driver;
+	WebDriverWait wait;
+	Actions builder;
 	
 	// Summary 
 	private WebElement minus;
@@ -24,11 +29,32 @@ public class FinalizaCompraPage extends MasterPage {
 	private WebElement password;
 	private WebElement submit;
 
+	// Address
+	private WebElement confirma;
+	private WebElement novoendereco;
+	private WebElement comentario;
+	private WebElement submitendereco;
+	
+	//Shipping
+	private WebElement aceite;
+	private WebElement termos;
+	private WebElement fechatermos;
+	private WebElement submitshipping;
+	
+	// Payment
+	private WebElement transferencia;
+	private WebElement cheque;
+	
+	private WebElement confirmtransferencia;
+	private WebElement confirmcheque;
+	
+	private WebElement sucesso;
 	
 	public FinalizaCompraPage(Driver baseD){
 		baseDriver = baseD;
 		driver = baseDriver.getDriver();
-		
+		wait = new WebDriverWait(driver, 15);
+		builder = new Actions(driver);
 	}
 	
 	public void loadSummary(){	
@@ -38,8 +64,6 @@ public class FinalizaCompraPage extends MasterPage {
 		setPlus(driver.findElement(By.className("icon-plus")));
 		setExcluir(driver.findElement(By.className("cart_quantity_delete")));
 		setCheckout(driver.findElement(By.xpath("//*[@id='center_column']/p[2]/a[1]/span")));
-
-		
 		
 	}
 
@@ -51,35 +75,55 @@ public class FinalizaCompraPage extends MasterPage {
 	
 	public void loadAddressTab(){
 		// Address
-		// updateDelivery = //*[@id="address_delivery"]/li[7]/a
-		// obs = "form-control"
+		setConfirma(driver.findElement(By.id("addressesAreEquals")));
+		setNovoEndereco(driver.findElement(By.xpath("//*[@id='center_column']/form/div/p/a/span")));
+		comentario = driver.findElement(By.className("form-control"));
+		submitendereco = driver.findElement(By.xpath("//*[@id='center_column']/form/p/button/span"));
 		
-		// proceed = //*[@id="center_column"]/form/p/button
 	}
 	
 	public void loadShippingTab(){
 		// Shipping
-		//check By.id("cgv")
-		// proceed //*[@id="form"]/p/button
+		aceite = driver.findElement(By.id("cgv"));
+		termos = driver.findElement(By.xpath("//*[@id='form']/div/p[2]/a"));
+		submitshipping = driver.findElement(By.xpath("//*[@id='form']/p/button"));
 		// alert className("fancybox-error")
+		//*[@id="form"]/p/button/span
 		
-		// text (Read the Terms of Service)
-		
-		// class fancybox-error - do not agree
 	}
 	
 	public void loadPaymentTab(){
 		// Payment
-		
-		//pay by bank wire  By.className("bankwire"));
-			// confirm		//*[@id="cart_navigation"]/button
-			//  finished
+		//pay by transferencia
+		transferencia = driver.findElement(By.className("bankwire"));
 		// Pay by check
-		//By.className("cheque");
+		cheque = driver.findElement(By.className("cheque"));
+	}
+	
+	public void aceitaTermos(){
+		By aceite = By.id("cgv");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(aceite));
+		getAceite().click();
+	}
+	
+	public void pagarTransferencia() {
+		builder.moveToElement(getTransferencia()).click().build().perform();
+		WebElement confirm = driver.findElement(By.xpath("//*[@id='cart_navigation']/button/span"));
+		builder.moveToElement(confirm).click().build().perform();
+	}
+	
+	public void pagarCheque() {
+		builder.moveToElement(getCheque()).click().build().perform();
+		WebElement confirm = driver.findElement(By.xpath("//*[@id='cart_navigation']/button/span"));
+		builder.moveToElement(confirm).click().build().perform();
+	}
+	
+	public Actions getBuilder(){
+		return builder;
+	}
 
-		// confirm //*[@id="cart_navigation"]/button
-		//By.tagName("")
-		// other http://automationpractice.com/index.php?controller=order&step=3
+	public WebDriverWait getWait(){
+		return wait;
 	}
 	
 	public WebElement getCheckout() {
@@ -136,4 +180,89 @@ public class FinalizaCompraPage extends MasterPage {
 		this.submit = submit;
 	}
 
+	public WebElement getConfirma() {
+		return confirma;
+	}
+
+	public void setConfirma(WebElement confirma) {
+		this.confirma = confirma;
+	}
+
+	public WebElement getNovoEndereco() {
+		return novoendereco;
+	}
+
+	public void setNovoEndereco(WebElement endereco) {
+		this.novoendereco = endereco;
+	}
+
+	public WebElement getComentario() {
+		comentario = driver.findElement(By.xpath("//*[@id='ordermsg']/textarea"));
+		return comentario;
+	}
+
+	public void setComentario(WebElement comentario) {
+		this.comentario = comentario;
+	}
+
+	public WebElement getSubmitEndereco() {
+		submitendereco = driver.findElement(By.xpath("//*[@id='center_column']/form/p/button/span"));
+		return submitendereco;
+	}
+
+	public WebElement getTermos() {
+		return termos;
+	}
+
+	public void setTermos(WebElement termos) {
+		this.termos = termos;
+	}
+
+	public WebElement getFechaTermos() {
+		fechatermos = driver.findElement(By.xpath("//*[@id='order']/div[2]/div/div/a"));
+		return fechatermos;
+	}
+
+	public void setFechaTermos(WebElement termos) {
+		this.fechatermos = termos;
+	}
+
+	public WebElement getSubmitShipping() {
+		submitshipping = driver.findElement(By.xpath("//*[@id='form']/p/button/span"));
+		return submitshipping;
+	}
+	public WebElement getLoginALert() {
+		WebElement obj = driver.findElement(By.linkText("There is 1 error"));
+		return obj;
+	}
+	
+	public WebElement getAceite() {
+		aceite = driver.findElement(By.id("cgv"));
+		return aceite;
+	}
+	
+	public WebElement getTransferencia() {
+		transferencia = driver.findElement(By.className("bankwire"));
+		return transferencia;
+	}
+
+	public WebElement getCheque() {
+		cheque = driver.findElement(By.className("cheque"));
+		return cheque;
+	}
+
+	public WebElement getConfirmTransferencia(){
+		confirmtransferencia = driver.findElement(By.xpath("//*[@id='cart_navigation]/button/span"));
+		return confirmtransferencia;
+	}
+
+	public WebElement getConfirmCheque(){
+		confirmcheque = driver.findElement(By.xpath("//*[@id='cart_navigation]/button/span"));
+		return confirmcheque;
+	}
+	
+	public WebElement getSucesso(){
+		sucesso = driver.findElement(By.xpath("//*[@id='center_column']/p[1]"));
+		return sucesso;
+	}
 }
