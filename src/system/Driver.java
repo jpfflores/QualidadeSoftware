@@ -6,70 +6,71 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 //import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+//import org.openqa.selenium.phantomjs.PhantomJSDriver;
+//import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Driver {
 	private static Driver instancia;
 	private WebDriver driver;
 	private String baseUrl;
-	
-	private Driver(){
-		
+
+	private Driver() {
+
 		String OS = System.getProperty("os.name").toLowerCase();
 
-		if(OS.indexOf("win") >= 0){
+		if (OS.indexOf("win") >= 0) {
 			// Using phantomjs
-			DesiredCapabilities caps = new DesiredCapabilities();
-			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");                  
-			//driver = new PhantomJSDriver(caps);
-			//driver.manage().window().setSize(new Dimension(1920, 1080));
-			
+			// DesiredCapabilities caps = new DesiredCapabilities();
+			// caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+			// "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");
+			// driver = new PhantomJSDriver(caps);
+			// driver.manage().window().setSize(new Dimension(1920, 1080));
+
 			System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
 			driver = new ChromeDriver();
 		} else {
-			
-			
+
 			System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
-			DesiredCapabilities capabilities=DesiredCapabilities.firefox();
+			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability("marionette", true);
 			driver = new FirefoxDriver(capabilities);
-			
-			/* 
-			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
-			driver = new ChromeDriver();
-			*/
+
 			/*
-			DesiredCapabilities caps = new DesiredCapabilities();
-			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "/usr/local/bin/phantomjs");                  
-			driver = new PhantomJSDriver(caps);
+			 * System.setProperty("webdriver.chrome.driver",
+			 * "/usr/local/bin/chromedriver"); driver = new ChromeDriver();
 			 */
-			
+			/*
+			 * DesiredCapabilities caps = new DesiredCapabilities();
+			 * caps.setCapability(PhantomJSDriverService.
+			 * PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "/usr/local/bin/phantomjs");
+			 * driver = new PhantomJSDriver(caps);
+			 */
+
 		}
-		
-	    baseUrl = "http://automationpractice.com";
-	    driver.get(baseUrl);
-	    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+
+		baseUrl = "http://automationpractice.com";
+		driver.get(baseUrl);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
-	
-	public static synchronized Driver getInstance(){
-		if(instancia == null){
+
+	public static synchronized Driver getInstance() {
+		if (instancia == null) {
 			instancia = new Driver();
 		}
 		return instancia;
 	}
-	public WebDriver getDriver(){
+
+	public WebDriver getDriver() {
 		return driver;
 	}
-	
-	public String getBaseUrl(){
+
+	public String getBaseUrl() {
 		return baseUrl;
 	}
-	 
-	
-	public void navegarPaginaBase(){
-		if(driver.getCurrentUrl().compareTo(baseUrl) != 0){
+
+	public void navegarPaginaBase() {
+		if (driver.getCurrentUrl().compareTo(baseUrl) != 0) {
 			driver.navigate().to(baseUrl);
 		}
 	}
