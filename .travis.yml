@@ -8,7 +8,7 @@ jdk:
 os:
     - linux
 
-before install: 
+install: 
    # Using chrome
    #- wget https://chromedriver.storage.googleapis.com/2.28/chromedriver_linux64.zip
    #- unzip chromedriver_linux64.zip
@@ -33,10 +33,6 @@ before install:
    #- sudo cp ./phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/.
    #- sudo chmod +x /usr/local/bin/phantomjs
    
-install:   
-  #- npm install selenium-webdriver@^3.0.0
-  #- npm install
-  
 before_script:
    #- "export DISPLAY=:99.0"
    - "sh -e /etc/init.d/xvfb start"
