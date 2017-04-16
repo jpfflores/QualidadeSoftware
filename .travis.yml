@@ -34,8 +34,8 @@ before install:
    #- sudo chmod +x /usr/local/bin/phantomjs
    
 install:   
-  - npm install selenium-webdriver@^3.0.0
-  - npm install
+  #- npm install selenium-webdriver@^3.0.0
+  #- npm install
   
 before_script:
    - "export DISPLAY=:99.0"
