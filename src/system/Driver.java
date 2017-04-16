@@ -2,12 +2,12 @@ package system;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-//import org.openqa.selenium.firefox.FirefoxDriver;
-//import org.openqa.selenium.phantomjs.PhantomJSDriver;
-//import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Driver {
@@ -21,14 +21,14 @@ public class Driver {
 
 		if (OS.indexOf("win") >= 0) {
 			// Using phantomjs
-			// DesiredCapabilities caps = new DesiredCapabilities();
-			// caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-			// "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");
-			// driver = new PhantomJSDriver(caps);
-			// driver.manage().window().setSize(new Dimension(1920, 1080));
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+			 "..\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");
+			driver = new PhantomJSDriver(caps);
+			driver.manage().window().setSize(new Dimension(1920, 1080));
 
-			System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
-			driver = new ChromeDriver();
+			//System.setProperty("webdriver.chrome.driver", "libs\\chromedriver.exe");
+			//driver = new ChromeDriver();
 		} else {
 
 			System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
@@ -51,7 +51,7 @@ public class Driver {
 
 		baseUrl = "http://automationpractice.com";
 		driver.get(baseUrl);
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	public static synchronized Driver getInstance() {

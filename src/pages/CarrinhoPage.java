@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import system.Driver;
@@ -28,16 +29,22 @@ public class CarrinhoPage extends MasterPage{
 	public CarrinhoPage(Driver baseD) {
 		baseDriver = baseD;
 		driver = baseDriver.getDriver();
-		wait = new WebDriverWait(driver, 15);
+		wait = new WebDriverWait(driver, 30);
 		builder = new Actions(driver);
 
 	}
 	
 	public int GetQuantityValue(){
 		int value = 0;
-		getQuantity();
+		WebElement elemento = getQuantity();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		if(quantity != null){
+		int tries = 0;
+		while(!(elemento != null && elemento.getText().length() >0) && tries < 5){
+			elemento = getQuantity();
+			tries++;
+		}
+		
+		if(elemento != null && elemento.getText().length() >0){
 			value = Integer.parseUnsignedInt(quantity.getText());
 		}
 		return value;
@@ -63,12 +70,13 @@ public class CarrinhoPage extends MasterPage{
 
 	public void mostraCarrinho(){
 		WebElement obj = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
-		Actions builder = new Actions(driver);
 		builder.moveToElement(obj).perform();
+		builder.contextClick(obj).build().perform();
 	}
 	
 	public void excluiItem(){
 		mostraCarrinho();
+		wait.until(ExpectedConditions.visibilityOfElementLocated((By) getRemoveItem()));
 		builder.moveToElement(getRemoveItem()).click().build().perform();
 	}
 	
