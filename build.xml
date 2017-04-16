@@ -17,7 +17,7 @@
 		<!--pathelement location="/usr/local/bin/chromedriver" />
 		<pathelement location="/usr/local/bin/geckodriver" />
 		<pathelement location="/usr/local/bin/phantomjs" /-->
-		<pathelement location="/usr/local/bin/geckodriver" />
+		<pathelement location="/usr/local/bin/phantomjs" />
 		<pathelement location="${build.dir}" />
 		<path refid="classpath.base" />
 	</path>
