@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
 //import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
@@ -29,21 +30,21 @@ public class Driver {
 			driver = new ChromeDriver();
 		} else {
 			
-			/*
+			
 			System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 			DesiredCapabilities capabilities=DesiredCapabilities.firefox();
 			capabilities.setCapability("marionette", true);
 			driver = new FirefoxDriver(capabilities);
-			*/
+			
 			/* 
 			System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 			driver = new ChromeDriver();
 			*/
-			
+			/*
 			DesiredCapabilities caps = new DesiredCapabilities();
 			caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "/usr/local/bin/phantomjs");                  
 			driver = new PhantomJSDriver(caps);
-
+			 */
 			
 		}
 		
