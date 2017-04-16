@@ -2,9 +2,7 @@ package pages;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,7 +14,6 @@ import system.Driver;
 public class SelecionaProdutoPage extends MasterPage{
 	
 	private WebElement menuWomen;
-	private WebElement menuDresses;
 	private WebElement menuTshirts;
 	private WebElement subMenuTshirts;	
 	private WebElement subMenuBlousesTshirts;	
@@ -99,10 +96,7 @@ public class SelecionaProdutoPage extends MasterPage{
 		menuWomen = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/a"));
 		builder.moveToElement(menuWomen).perform();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//*[@id="block_top_menu"]/ul/li[1]/a
 		this.subMenuTshirts = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[1]/a"));
-		
-		//this.subMenuTshirts = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[1]/a")));
 		builder.moveToElement(subMenuTshirts).perform();
 		subMenuTshirts.click();
 	}
@@ -110,9 +104,7 @@ public class SelecionaProdutoPage extends MasterPage{
 	public void SelecionaSubMenuBlousesWomen(){
 		menuWomen = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/a"));
 		builder.moveToElement(menuWomen).perform();
-		//WebElement elemento = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a")));
 		this.menuTshirts = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a")));
-		//this.menuTshirts = driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li[1]/ul/li[1]/ul/li[2]/a"));
 		menuTshirts.click();
 	}
 	
